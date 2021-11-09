@@ -26,12 +26,12 @@ export default function WorkerDrawer() {
           </ListItem>
         </Link>
 
-        <Link to="/worker/previousorders">
+        <Link to="/worker/orders">
           <ListItem button>
             <ListItemIcon>
               <HistoryIcon />
             </ListItemIcon>
-            <ListItemText primary={"PREVIOUS ORDERS"} />
+            <ListItemText primary={"ORDERS"} />
           </ListItem>
         </Link>
 
