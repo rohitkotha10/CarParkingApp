@@ -6,10 +6,10 @@ npm packages to install are @mui/material @mui/styles @emotion/react @emotion/st
 type `npm install`  
 use `npm start` to start the frontend webpage  
 
-Refresh Does not work  
+Refresh Does not work(need to configure react-router)  
 
 Backend Using SpringBoot  
-Spring Web, MySQL Driver, Spring Data JPA, Spring Boot devtools dependencies  
+Spring Web, MySQL Driver, Spring Data JPA, Spring Boot devtools dependencies, lombok  
 
 XAAMP Control Panel for MySQL database management 
 
