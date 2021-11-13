@@ -1,14 +1,16 @@
 package com.weboop.carpark.model;
 
 import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.Table;
 
 @Entity
 @Data
+@Table(name = "admin")
 public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +18,5 @@ public class Admin {
 
     private String name;
     private String email;
-
-    @Transient
     private String password;
 }

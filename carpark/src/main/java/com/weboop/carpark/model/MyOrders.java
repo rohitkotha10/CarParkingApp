@@ -1,6 +1,10 @@
 package com.weboop.carpark.model;
 
 import lombok.Data;
+
+import java.util.*;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Data
-@Table(name="Orders")
+@Table(name = "my_orders")
 public class MyOrders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,16 +21,28 @@ public class MyOrders {
 
     private int duration;
     private int hello;
-    private int slotTime;
-    private int rating;
+    private String slotTime;//8digit string format HHMM-HHMM
+    private int rating; //from 1 to 5
     private int totalPayment;
-    // private ArrayList<String> comments = new ArrayList<String>();
-    // private ParkingSlot slot;
-    // private User user;
-    // private Worker worker;
+    public boolean dryCleaning = false;
+    public boolean carWash = false;
+    public boolean airFill = false;
 
-    // calculate payment implementation
-    // services offered
+    @ElementCollection
+    private List<String> comments = new ArrayList<String>();
+
+    private int ParkingSlotID;
+    private int userID;
+    private int workerID;
+
+    public int getDuration() {
+        Integer.parseInt(this.slotTime);
+        return 1;
+    }
+
+    public int calculatePayment() {
+        return 100;
+    }
 
     // Unique ID
     // Linked parking spot, time, duration services
