@@ -20,7 +20,6 @@ public class MyOrders {
     private int id;
 
     private int duration;
-    private int hello;
     private String slotTime;//8digit string format HHMM-HHMM
     private int rating; //from 1 to 5
     private int totalPayment;

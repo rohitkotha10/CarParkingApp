@@ -1,6 +1,17 @@
 package com.weboop.carpark.controller;
 
+//mapping /login
 public class LoginController {
+    // @GET Mapping "/validateUser"
+    // {
+    //     name, password
+         //   login page: user, pass, 
+    // }
+    //
+    
+    //get command details from his name and password
+
+    //search 
     //send details and verify
     
     //must select type of person i.e user/admin/worker at login time
