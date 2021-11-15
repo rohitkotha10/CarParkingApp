@@ -17,4 +17,10 @@ Spring Backend running in Tomcat port 8080
 MySQL admin portal running on Apache port 3306  
 Frontend React running on nodejs port 3000  
 
+Members:    
+Anshul  
+Uday  
+Rohit  
+Chirag
+
 
