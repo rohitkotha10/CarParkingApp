@@ -9,7 +9,8 @@ use `npm start` to start the frontend webpage
 Refresh Does not work(need to configure react-router)  
 
 Backend Using SpringBoot  
-Spring Web, MySQL Driver, Spring Data JPA, Spring Boot devtools dependencies, lombok  
+Spring Inititalizer  
+Spring Web, MySQL Driver, Spring Data JPA, Spring Boot devtools dependencies, OAuth 2.0, Java Mail Sender, Spring Security  
 
 XAAMP Control Panel for MySQL database management 
 
