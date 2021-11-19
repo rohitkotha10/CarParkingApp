@@ -30,11 +30,6 @@ public class LoginController {
 
     String type, email, password;
 
-    @GetMapping("/googlelogin")
-    public String googlelog() {
-        return "Her";
-    }
-
     @PostMapping("/getuserdetails")
     public String add(@RequestBody LoginRequest details) {
 
@@ -83,17 +78,3 @@ class LoginRequest {
     public String password;
 
 }
-
-// get command details from his name and password
-
-// search
-// send details and verify
-
-// must select type of person i.e user/admin/worker at login time
-
-// Google, Insta, FB, Linkedin Authentication
-
-// First Name, Last Name, Username, Password, Confirm Password, Residential
-// Address, Email ID, Mobile number, and Car Registration number. It is to be
-// noted that the registration should be allowed only after verifying either
-// phone number or Email with One-Time-password (OTP).

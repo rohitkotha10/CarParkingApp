@@ -1,7 +1,7 @@
 # OOPS Project: Car Parking Application
 
 Frontend Using ReactJS, MaterialUI and React Router  
-npm packages to install are @mui/material @mui/styles @emotion/react @emotion/styled @material-ui/icons react-router-dom@5  
+npm packages to install are @mui/material @mui/styles @emotion/react @emotion/styled @material-ui/icons react-router-dom@5 react-simple-oauth2-login 
 
 type `npm install`  
 use `npm start` to start the frontend webpage  
