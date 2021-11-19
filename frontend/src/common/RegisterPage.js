@@ -35,16 +35,19 @@ const theme = createTheme({
       },
     },
   });
-  const[email,setemail]=React.useState('')
-  const[password,setpassword]=React.useState('')
-  const[type,settype]=React.useState('')
+  const[firstName,setfirstName]=React.useState('')
+  const[lastName,setlastName]=React.useState('')
+  const[address,setaddress]=React.useState('')
+  const[mobileNumber,setmobileNumber]=React.useState('')
+  const[carNumber,setcarNumber]=React.useState('')
+  const[verificationCode,setverificationCode]=React.useState('')
   
   const handleChange = (event) => {
     settype(event.target.value);}
 
   const handleClick=(e)=>{
     e.preventDefault()
-    const userdetails={email,password,type}
+    const userdetails={firstName,lastName,address,mobileNumber,carNumber,verificationCode}
     console.log(userdetails)
   }
 
@@ -60,25 +63,12 @@ const theme = createTheme({
         
       <Typography variant="h3" color="white"> ABC Parking Company</Typography>  
 
-      <Link to="/admin">
-        <Button> Admin </Button>
-      </Link>
-
-      <Link to="/user">
-        <Button> User </Button>
-      </Link>
-
-      <Link to="/worker">
-        <Button> Worker </Button>
-      </Link>
-      
       <Box ml={150} mt={25}
       sx={{
         width: 350,
         backgroundColor: 'neutral.contrastText',
         borderRadius: '12px'
       }}>
-      <Typography color="#1a237e">Sign in using ID and Password</Typography>
       <Box
       component="form"
       sx={{
@@ -87,41 +77,27 @@ const theme = createTheme({
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label="User ID" variant="filled" color="neutral"
-      value={email}
-      onChange={(e)=>setemail(e.target.value)}
+      <TextField id="outlined-basic" label="First Name" variant="filled" color="neutral"
+      value={firstName}
+      onChange={(e)=>setfirstName(e.target.value)}
       />
-      <TextField id="outlined-basic" label="Password" variant="filled" color="neutral"
-      value={password}
-      onChange={(e)=>setpassword(e.target.value)}/>
+      <TextField id="outlined-basic" label="Last Name" variant="filled" color="neutral"
+      value={lastName}
+      onChange={(e)=>setlastName(e.target.value)}/>
+      <TextField id="outlined-basic" label="Address" variant="filled" color="neutral"
+      value={address}
+      onChange={(e)=>setaddress(e.target.value)}/>
+      <TextField id="outlined-basic" label="Mobile Number" variant="filled" color="neutral"
+      value={mobileNumber}
+      onChange={(e)=>setmobileNumber(e.target.value)}/>
+      <TextField id="outlined-basic" label="Car Number" variant="filled" color="neutral"
+      value={carNumber}
+      onChange={(e)=>setcarNumber(e.target.value)}/>
+      <TextField id="outlined-basic" label="Verification Code" variant="filled" color="neutral"
+      value={verificationCode}
+      onChange={(e)=>setverificationCode(e.target.value)}/>
     </Box>
-
-    <Typography>
-    Select your role
-      <Box pl={-5} pb = {5}>
- 
-      <Select
-        labelId="demo-simple-select-required-label"
-        label="role"
-        id="demo-simple-select-required"
-        value={type}
-        onChange={handleChange}
-      >
-        <MenuItem value={"Admin"}>Admin</MenuItem>
-        <MenuItem value={"User"}>User</MenuItem>
-        <MenuItem value={"Worker"}>Worker</MenuItem>
-      </Select>
-      </Box>
-    
-    </Typography>
-    <Button variant="contained" color="neutral" onClick={handleClick}>Sign In</Button>
-    <Typography>-OR-</Typography>
-
-<Button variant="contained" color="neutral" >Sign in using Google</Button>
-<Typography> </Typography>
-<Link href="#" underline="hover">New User? Sign up</Link>
-
-</Box>
+    <Button variant="contained" color="neutral" onClick={handleClick}>Register</Button>
 </Box>
 </ThemeProvider>
     </div>
