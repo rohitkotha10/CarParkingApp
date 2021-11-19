@@ -1,7 +1,5 @@
 package com.weboop.carpark.model;
 
-import lombok.Data;
-
 import java.util.*;
 
 import javax.persistence.ElementCollection;
@@ -12,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Data
 @Table(name = "parking_slots")
 public class ParkingSlot {
     @Id
@@ -20,7 +17,7 @@ public class ParkingSlot {
     private int id;
 
     private String location;
-    private boolean isOccupied;
+    private boolean Occupied;
 
     @ElementCollection
     private List<Integer> linkedOrderIDs = new ArrayList<Integer>();
@@ -30,6 +27,22 @@ public class ParkingSlot {
         //avgs of all linkedOrderRatings
     }
     // get avg rating
+
+    public boolean isOccupied() {
+        return Occupied;
+    }
+
+    public void setOccupied(boolean occupied) {
+        this.Occupied = occupied;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 }
 // SlotNumber, location
 // occupied/unoccupied
