@@ -28,7 +28,7 @@ public class User {
     private String password;
 
     @ElementCollection
-    private List<Integer> linkedOrderIDs = new ArrayList<Integer>();
+    private Set<Integer> linkedOrderIDs = new HashSet<Integer>();
 
     public String getEmail() {
         return this.email;
@@ -38,11 +38,11 @@ public class User {
         this.email = email;
     }
 
-    public List<Integer> getLinkedOrderIDs() {
+    public Set<Integer> getLinkedOrderIDs() {
         return linkedOrderIDs;
     }
 
-    public void setLinkedOrderIDs(List<Integer> linkedOrderIDs) {
+    public void setLinkedOrderIDs(Set<Integer> linkedOrderIDs) {
         this.linkedOrderIDs = linkedOrderIDs;
     }
 

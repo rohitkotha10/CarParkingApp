@@ -22,7 +22,15 @@ public class Worker {
     private String password;
     
     @ElementCollection
-    private List<Integer> linkedOrderIDs = new ArrayList<Integer>();
+    private Set<Integer> linkedOrderIDs = new HashSet<Integer>();
+
+    public Set<Integer> getLinkedOrderIDs() {
+        return linkedOrderIDs;
+    }
+
+    public void setLinkedOrderIDs(Set<Integer> linkedOrderIDs) {
+        this.linkedOrderIDs = linkedOrderIDs;
+    }
 
     public int getRating() {
         return 3;

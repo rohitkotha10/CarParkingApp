@@ -31,9 +31,9 @@ public class UserNonRegService {
         SimpleMailMessage msg = new SimpleMailMessage();
 
         String tempVer = String.valueOf(new Random().nextInt(899999) + 100000);
-        msg.setFrom("rohitspaceset@gmail.com");
+        msg.setFrom("carparkverify@gmail.com");
         msg.setTo(user.getEmail());
-        msg.setSubject("Verification SpringBoot");
+        msg.setSubject("Verification CarParkApp");
         msg.setText("Welcome, Your Verification Code is" + " " + tempVer);
 
         mailSender.send(msg);
