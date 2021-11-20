@@ -12,7 +12,6 @@ import Select from '@mui/material/Select';
 import GoogleLogin from 'react-google-login'
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
-
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { useHistory } from "react-router-dom";
 
@@ -96,8 +95,6 @@ export default function LoginPage() {
 
 
   return (
-
-
     <Container>
       <div>
         <Typography fontWeight={700} variant="h3" color="black"> CAR PARKING APP </Typography>
@@ -167,4 +164,3 @@ export default function LoginPage() {
     </Container >
   );
 }
-
