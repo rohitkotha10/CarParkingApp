@@ -1,12 +1,12 @@
 import React from 'react'
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material'
+import { Drawer, List, ListItem, ListItemIcon, ListItemText} from '@mui/material'
 
 import HomeIcon from "@mui/icons-material/Home"
 import PersonIcon from '@mui/icons-material/Person';
 import CommentIcon from '@mui/icons-material/Comment';
 import HistoryIcon from '@mui/icons-material/History';
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Link  } from "react-router-dom"
 
 export default function WorkerDrawer() {
   return (
@@ -17,7 +17,7 @@ export default function WorkerDrawer() {
       open={true}>
 
       <List>
-        <Link to="/worker/">
+        <Link to="/worker/" style={{ textDecoration: 'none', color: "black" }}>
           <ListItem button>
             <ListItemIcon>
               <HomeIcon />
@@ -26,7 +26,7 @@ export default function WorkerDrawer() {
           </ListItem>
         </Link>
 
-        <Link to="/worker/orders">
+        <Link to="/worker/orders" style={{ textDecoration: 'none', color: "black" }}>
           <ListItem button>
             <ListItemIcon>
               <HistoryIcon />
@@ -35,7 +35,7 @@ export default function WorkerDrawer() {
           </ListItem>
         </Link>
 
-        <Link to="/worker/feedback">
+        <Link to="/worker/feedback" style={{ textDecoration: 'none', color: "black" }}>
           <ListItem button>
             <ListItemIcon>
               <CommentIcon />
@@ -44,7 +44,7 @@ export default function WorkerDrawer() {
           </ListItem>
         </Link>
 
-        <Link to="/worker/profileinfo">
+        <Link to="/worker/profileinfo" style={{ textDecoration: 'none', color: "black" }}>
           <ListItem button>
             <ListItemIcon>
               <PersonIcon />

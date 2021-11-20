@@ -1,131 +1,166 @@
 import * as React from 'react';
-import { useState } from 'react';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import { Button, Typography } from '@mui/material';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
-import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { styled, alpha } from '@mui/material/styles';
-import Menu from '@mui/material/Menu';
+import Paper from '@mui/material/Paper';
+import Container from '@mui/material/Container';
+import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-export default function LoginPage() {
-const theme = createTheme({
-    spacing: 4,
-    status: {
-      danger: '#e53e3e',
-    },
-    palette: {
-      primary: {
-        main: '#0971f1',
-        darker: '#053e85',
-      },
-      neutral: {
-        main: '#1a237e',
-        contrastText: '#fff',
-      },
-      rcolor: {
-        main: '#fff',
-      },
-    },
-  });
-  const[email,setemail]=React.useState('')
-  const[password,setpassword]=React.useState('')
-  const[type,settype]=React.useState('')
-  
-  const handleChange = (event) => {
-    settype(event.target.value);}
+import GoogleLogin from 'react-google-login'
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
-  const handleClick=(e)=>{
-    e.preventDefault()
-    const userdetails={email,password,type}
-    console.log(userdetails)
+export default function LoginPage() {
+  const paperStyle = { padding: '50px 20px', width: 600, margin: "20px auto" }
+  const [type, setType] = React.useState('')
+  const [email, setEmail] = React.useState('')
+  const [password, setPassword] = React.useState('')
+  const [normalLog, setNormal] = React.useState(false)
+  const [googleLog, setGoogle] = React.useState(false)
+  const [authenticated, setAuth] = React.useState(5)
+  const [isFirstTime, setFirstTime] = React.useState(true)
+  let history = useHistory();
+
+
+  const handleTypeChange = (event) => {
+    setType(event.target.value);
   }
 
+  React.useEffect(() => {
+    const here = { email };
+    console.log(here);
+    fetch("http://localhost:8080/login/googlelogin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(here)
+    }).then(data => data.json())
+      .then((data) => {
+        console.log(data);
+        if (data == 0) {
+          history.push('/user');
+        };
+        setAuth(data);
+
+      })
+  }, [googleLog])
+
+  React.useEffect(() => {
+    const userdetails = { email, password, type }
+    console.log(userdetails)
+
+    fetch("http://localhost:8080/login/normallogin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(userdetails)
+    }).then(data => data.json())
+      .then((data) => {
+        console.log(data);
+        if (data == 0) {
+          history.push('/' + type);
+        };
+        setAuth(data);
+      })
+  }, [normalLog])
+
+  const handleClick = (e) => {
+    setFirstTime(false);
+    setAuth(authenticated);
+    e.preventDefault()
+    setNormal(!normalLog);
+
+  }
+
+  const onLoginSuccess = (res) => {
+    setFirstTime(false);
+    setEmail(res.profileObj.email);
+    setGoogle(!googleLog);
+    if (authenticated) {
+      console.log(authenticated);
+    }
+  };
+
+  const onLoginFailure = (res) => {
+    setFirstTime(false);
+    console.log('Login Failed:', res);
+  };
+
+
   return (
-    <div>
-      <ThemeProvider theme={theme}>
-      <Box 
-      sx={{
-        width: 1536,
-        height: 753,
-        backgroundColor: 'neutral.main',
-      }}>
-        
-      <Typography variant="h3" color="white"> ABC Parking Company</Typography>  
+    <Container>
+      <div>
+        <Typography fontWeight={700} variant="h3" color="black"> CAR PARKING APP </Typography>
+      </div>
 
-      <Link to="/admin">
-        <Button> Admin </Button>
-      </Link>
+      <div>
+        <Paper elevation={2} style={paperStyle}>
+          <Box>
+            <Typography fontSize={42} fontWeight={400} gutterBottom>
+              Login
+            </Typography>
+          </Box>
+          {(authenticated && !isFirstTime) && (
+            <Typography color="#eb6359">
+              Something Wrong! Please Try Again.
+            </Typography>
+          )}
+          <Box
+            component="form"
+            sx={{
+              '& > :not(style)': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField id="outlined-basic" label="Email" variant="outlined"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <TextField id="outlined-basic" label="Password" variant="outlined"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)} />
+          </Box>
 
-      <Link to="/user">
-        <Button> User </Button>
-      </Link>
+          <FormControl sx={{ m: 1, minWidth: 130 }}>
+            <InputLabel id="demo-simple-select-label">Select Role</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={type}
+              label="Select Role"
+              onChange={handleTypeChange}
+            >
+              <MenuItem value={"Admin"}> Admin </MenuItem>
+              <MenuItem value={"Worker"}> Worker </MenuItem>
+              <MenuItem value={"User"}> User </MenuItem>
+            </Select>
+          </FormControl>
+          <Box
+            sx={{
+              '& > :not(style)': { m: 2, width: '12ch' },
+            }}>
+            <Button variant="contained" onClick={handleClick}>
+              Sign In
+            </Button>
+            <GoogleLogin
+              clientId="829491663211-k8te1geatnsvbrmugl0dge9hj0lt2hlb.apps.googleusercontent.com"
+              buttonText="Login"
+              onSuccess={onLoginSuccess}
+              onFailure={onLoginFailure}
+            />
+          </Box>
+          <Link href="#" underline="hover">New User?Sign up</Link>
 
-      <Link to="/worker">
-        <Button> Worker </Button>
-      </Link>
-      
-      <Box ml={150} mt={25}
-      sx={{
-        width: 350,
-        backgroundColor: 'neutral.contrastText',
-        borderRadius: '12px'
-      }}>
-      <Typography color="#1a237e">Sign in using ID and Password</Typography>
-      <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField id="outlined-basic" label="User ID" variant="filled" color="neutral"
-      value={email}
-      onChange={(e)=>setemail(e.target.value)}
-      />
-      <TextField id="outlined-basic" label="Password" variant="filled" color="neutral"
-      value={password}
-      onChange={(e)=>setpassword(e.target.value)}/>
-    </Box>
-
-    <Typography>
-    Select your role
-      <Box pl={-5} pb = {5}>
- 
-      <Select
-        labelId="demo-simple-select-required-label"
-        label="role"
-        id="demo-simple-select-required"
-        value={type}
-        onChange={handleChange}
-      >
-        <MenuItem value={"Admin"}>Admin</MenuItem>
-        <MenuItem value={"User"}>User</MenuItem>
-        <MenuItem value={"Worker"}>Worker</MenuItem>
-      </Select>
-      </Box>
-    
-    </Typography>
-    <Button variant="contained" color="neutral" onClick={handleClick}>Sign In</Button>
-    <Typography>-OR-</Typography>
-
-<Button variant="contained" color="neutral" >Sign in using Google</Button>
-<Typography> </Typography>
-<Link href="#" underline="hover">New User? Sign up</Link>
-
-</Box>
-</Box>
-</ThemeProvider>
-    </div>
+        </Paper>
+      </div>
+    </Container >
   );
 }
-
-

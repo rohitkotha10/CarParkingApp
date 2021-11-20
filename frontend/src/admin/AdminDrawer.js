@@ -1,12 +1,12 @@
 import React from 'react'
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material'
+import { Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 
 import HomeIcon from "@mui/icons-material/Home"
 import PersonIcon from '@mui/icons-material/Person';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import HistoryIcon from '@mui/icons-material/History';
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Link  } from "react-router-dom"
 
 export default function AdminDrawer() {
   return (
@@ -17,7 +17,7 @@ export default function AdminDrawer() {
       open={true}>
 
       <List>
-        <Link to="/admin/">
+        <Link to="/admin/" style={{ textDecoration: 'none', color: "black" }}>
           <ListItem button>
             <ListItemIcon>
               <HomeIcon />
@@ -26,7 +26,7 @@ export default function AdminDrawer() {
           </ListItem>
         </Link>
 
-        <Link to="/admin/parkingspots">
+        <Link to="/admin/parkingspots" style={{ textDecoration: 'none', color: "black" }}>
           <ListItem button>
             <ListItemIcon>
               <DirectionsCarIcon />
@@ -35,7 +35,7 @@ export default function AdminDrawer() {
           </ListItem>
         </Link>
 
-        <Link to="/admin/orders">
+        <Link to="/admin/orders" style={{ textDecoration: 'none', color: "black" }}>
           <ListItem button>
             <ListItemIcon>
               <HistoryIcon />
@@ -44,7 +44,7 @@ export default function AdminDrawer() {
           </ListItem>
         </Link>
 
-        <Link to="/admin/allusers">
+        <Link to="/admin/allusers" style={{ textDecoration: 'none', color: "black" }}>
           <ListItem button>
             <ListItemIcon>
               <PersonIcon />
@@ -53,7 +53,7 @@ export default function AdminDrawer() {
           </ListItem>
         </Link>
 
-        <Link to="/admin/allworkers">
+        <Link to="/admin/allworkers" style={{ textDecoration: 'none', color: "black" }}>
           <ListItem button>
             <ListItemIcon>
               <PersonIcon />

@@ -1,7 +1,5 @@
 package com.weboop.carpark.model;
 
-import lombok.Data;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Data
 @Table(name = "waiting_list")
 public class WaitingUser {
     @Id
@@ -18,4 +15,17 @@ public class WaitingUser {
 
     private int userID;
     private int parkingSlotID;
+    
+    public int getUserID() {
+        return userID;
+    }
+    public int getParkingSlotID() {
+        return parkingSlotID;
+    }
+    public void setParkingSlotID(int parkingSlotID) {
+        this.parkingSlotID = parkingSlotID;
+    }
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 }
