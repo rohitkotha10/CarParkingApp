@@ -6,7 +6,7 @@ import Booking from '../user/Booking'
 import PreviousOrders from '../user/PreviousOrders'
 import ProfileInfo from '../user/ProfileInfo'
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Link  } from "react-router-dom"
 
 export default function UserDash() {
   return (

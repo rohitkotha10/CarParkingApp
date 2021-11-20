@@ -6,7 +6,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import HistoryIcon from '@mui/icons-material/History';
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Link  } from "react-router-dom"
 
 export default function UserDrawer() {
   return (
@@ -17,7 +17,7 @@ export default function UserDrawer() {
       open={true}>
 
       <List>
-        <Link to="/user/">
+        <Link to="/user/" style={{ textDecoration: 'none', color: "black" }}>
           <ListItem button>
             <ListItemIcon>
               <HomeIcon />
@@ -26,7 +26,7 @@ export default function UserDrawer() {
           </ListItem>
         </Link>
 
-        <Link to="/user/booking">
+        <Link to="/user/booking" style={{ textDecoration: 'none', color: "black" }}>
           <ListItem button>
             <ListItemIcon>
               <DirectionsCarIcon />
@@ -35,7 +35,7 @@ export default function UserDrawer() {
           </ListItem>
         </Link>
 
-        <Link to="/user/previousorders">
+        <Link to="/user/previousorders" style={{ textDecoration: 'none', color: "black" }}>
           <ListItem button>
             <ListItemIcon>
               <HistoryIcon />
@@ -44,7 +44,7 @@ export default function UserDrawer() {
           </ListItem>
         </Link>
 
-        <Link to="/user/profileinfo">
+        <Link to="/user/profileinfo" style={{ textDecoration: 'none', color: "black" }}>
           <ListItem button>
             <ListItemIcon>
               <PersonIcon />
@@ -54,6 +54,6 @@ export default function UserDrawer() {
         </Link>
       </List>
 
-    </Drawer>
+    </Drawer >
   );
 }

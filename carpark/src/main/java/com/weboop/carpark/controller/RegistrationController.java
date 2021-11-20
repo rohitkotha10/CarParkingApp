@@ -1,11 +1,14 @@
 package com.weboop.carpark.controller;
 
+import javax.transaction.Transactional;
+
 import com.weboop.carpark.model.User;
 import com.weboop.carpark.service.UserService;
+import com.weboop.carpark.model.UserNonReg;
+import com.weboop.carpark.service.UserNonRegService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,53 +19,48 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 public class RegistrationController {
     @Autowired
+    private UserNonRegService userNonRegService;
+
+    @Autowired
     private UserService userService;
 
-    User curUser = new User();
-    String code;
-
     @PostMapping("/input") // validate in frontend only
-    public String add(@RequestBody User frontUser) {
+    public int add(@RequestBody UserNonReg original) {
 
-        curUser = frontUser;
-
-        return "Checking if Email Available";
-    }
-
-    @GetMapping("/inputresponse")
-    public int addRes() {
-
-        if (userService.existsByEmail(curUser.getEmail()))
+        if (userService.existsByEmail(original.getEmail()) ||
+        userNonRegService.existsByEmail(original.getEmail()))
             return 1;// already exists
-        code = userService.sendEmail(curUser);
-        curUser.setVerificationCode(code);
+        String code = userNonRegService.sendEmail(original);
+        original.setVerificationCode(code);
+        userNonRegService.saveUser(original);
         return 0;
+        // return "Checking if Email Available";
     }
 
-    @PostMapping("/verifycodeinput")
-    public String verifyInput(@RequestBody VerifyClass verifycode) {
+    @PostMapping("/verifycode")
+    @Transactional
+    public int verifyInput(@RequestBody UserNonReg client) {
 
-        this.code = verifycode.code;
-        return "Checking... " + curUser.getVerificationCode() + " " + verifycode.code;
-    }
+        if (!userNonRegService.existsByEmail(client.getEmail()))
+            return 1;// unauthorized
+        UserNonReg cur = userNonRegService.findByEmail(client.getEmail());
 
-    @GetMapping("/coderes")
-    public int verifyOutput() {
+        if (!client.getEnterCode().equals(cur.getVerificationCode()))
+            return 2;
 
-        if (!curUser.getVerificationCode().equals(code))
-            return 1;// wrong code
+        User welcomeUser = new User();
+
+        welcomeUser.setFirstName(cur.getFirstName());
+        welcomeUser.setLastName(cur.getLastName());
+        welcomeUser.setAddress(cur.getAddress());
+        welcomeUser.setMobileNumber(cur.getMobileNumber());
+        welcomeUser.setCarNumber(cur.getCarNumber());
+        welcomeUser.setEmail(cur.getEmail());
+        welcomeUser.setPassword(cur.getPassword());
+
+        userService.saveUser(welcomeUser);
+        userNonRegService.removeByEmail(cur.getEmail());
 
         return 0;// ok
     }
-
-    @GetMapping("/successregister")
-    public String totalokay() {
-        userService.saveUser(curUser);
-        return "Registered";
-    }
-
-}
-
-class VerifyClass {
-    public String code;
 }

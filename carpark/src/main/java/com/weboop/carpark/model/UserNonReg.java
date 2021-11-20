@@ -1,9 +1,6 @@
 package com.weboop.carpark.model;
 
-import java.util.*;
-
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,8 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "userNonReg")
+public class UserNonReg {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -26,9 +24,12 @@ public class User {
     private String email;
 
     private String password;
+    private String verificationCode;
+    private String enterCode;
 
-    @ElementCollection
-    private List<Integer> linkedOrderIDs = new ArrayList<Integer>();
+    public String getEnterCode() {
+        return enterCode;
+    }
 
     public String getEmail() {
         return this.email;
@@ -38,12 +39,12 @@ public class User {
         this.email = email;
     }
 
-    public List<Integer> getLinkedOrderIDs() {
-        return linkedOrderIDs;
+    public String getPassword() {
+        return password;
     }
 
-    public void setLinkedOrderIDs(List<Integer> linkedOrderIDs) {
-        this.linkedOrderIDs = linkedOrderIDs;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getCarNumber() {
@@ -86,11 +87,15 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getPassword() {
-        return this.password;
+    public void setEnterCode(String enterCode) {
+        this.enterCode = enterCode;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
     }
 }
