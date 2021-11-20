@@ -10,8 +10,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import GoogleLogin from 'react-google-login'
-import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { useHistory } from "react-router-dom";
 
@@ -24,8 +22,8 @@ export default function LoginPage() {
   const [googleLog, setGoogle] = React.useState(false)
   const [authenticated, setAuth] = React.useState(5)
   const [isFirstTime, setFirstTime] = React.useState(true)
+  const [isValid, setValid] = React.useState(true)
   let history = useHistory();
-
 
   const handleTypeChange = (event) => {
     setType(event.target.value);
@@ -33,6 +31,8 @@ export default function LoginPage() {
 
   React.useEffect(() => {
     const here = { email };
+    if (email.length == 0)
+      return;
     console.log(here);
     fetch("http://localhost:8080/login/googlelogin", {
       method: "POST",
@@ -42,17 +42,20 @@ export default function LoginPage() {
       body: JSON.stringify(here)
     }).then(data => data.json())
       .then((data) => {
+        console.log("Fir :", authenticated);
+        setAuth(data);
+        console.log("Sec :", authenticated);
         console.log(data);
         if (data == 0) {
           history.push('/user');
         };
-        setAuth(data);
-
       })
   }, [googleLog])
 
   React.useEffect(() => {
     const userdetails = { email, password, type }
+    if (email.length == 0 || password.length == 0 || type.length == 0)
+      return;
     console.log(userdetails)
 
     fetch("http://localhost:8080/login/normallogin", {
@@ -67,32 +70,25 @@ export default function LoginPage() {
         if (data == 0) {
           history.push('/' + type);
         };
-        setAuth(data);
       })
   }, [normalLog])
 
   const handleClick = (e) => {
     setFirstTime(false);
-    setAuth(authenticated);
     e.preventDefault()
     setNormal(!normalLog);
-
   }
 
   const onLoginSuccess = (res) => {
     setFirstTime(false);
     setEmail(res.profileObj.email);
     setGoogle(!googleLog);
-    if (authenticated) {
-      console.log(authenticated);
-    }
-  };
+  }
 
   const onLoginFailure = (res) => {
     setFirstTime(false);
     console.log('Login Failed:', res);
   };
-
 
   return (
     <Container>
@@ -107,7 +103,7 @@ export default function LoginPage() {
               Login
             </Typography>
           </Box>
-          {(authenticated && !isFirstTime) && (
+          {(authenticated && isValid && !isFirstTime) && (
             <Typography color="#eb6359">
               Something Wrong! Please Try Again.
             </Typography>
@@ -124,7 +120,7 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <TextField id="outlined-basic" label="Password" variant="outlined"
+            <TextField id="outlined-password-input" label="Password" type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)} />
           </Box>
@@ -151,13 +147,23 @@ export default function LoginPage() {
               Sign In
             </Button>
             <GoogleLogin
-              clientId="829491663211-k8te1geatnsvbrmugl0dge9hj0lt2hlb.apps.googleusercontent.com"
+              clientId="968289488539-e07utl8uktf1hsp3ndvi5ee162p3p1mk.apps.googleusercontent.com"
               buttonText="Login"
               onSuccess={onLoginSuccess}
               onFailure={onLoginFailure}
             />
           </Box>
-          <Link href="#" underline="hover">New User?Sign up</Link>
+          <Link to="/register" style={{ textDecoration: 'none', color: "black" }}>
+            <Button>
+              New User? Sign up here
+            </Button>
+          </Link>
+            <br />
+          <Link to="/verify" style={{ textDecoration: 'none', color: "black" }}>
+            <Button>
+              Already Registred? Verify Yourself
+            </Button>
+          </Link>
 
         </Paper>
       </div>

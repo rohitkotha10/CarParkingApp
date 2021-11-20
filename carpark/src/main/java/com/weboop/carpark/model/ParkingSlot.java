@@ -20,7 +20,7 @@ public class ParkingSlot {
     private boolean Occupied;
 
     @ElementCollection
-    private List<Integer> linkedOrderIDs = new ArrayList<Integer>();
+    private Set<Integer> linkedOrderIDs = new HashSet<Integer>();
 
     public int getAvgRating() {
         return 3;
@@ -42,6 +42,14 @@ public class ParkingSlot {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Set<Integer> getLinkedOrderIDs() {
+        return linkedOrderIDs;
+    }
+
+    public void setLinkedOrderIDs(Set<Integer> linkedOrderIDs) {
+        this.linkedOrderIDs = linkedOrderIDs;
     }
 }
 // SlotNumber, location

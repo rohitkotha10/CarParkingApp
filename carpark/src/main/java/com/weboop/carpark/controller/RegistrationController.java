@@ -8,6 +8,7 @@ import com.weboop.carpark.model.UserNonReg;
 import com.weboop.carpark.service.UserNonRegService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSendException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,16 +26,21 @@ public class RegistrationController {
     private UserService userService;
 
     @PostMapping("/input") // validate in frontend only
-    public int add(@RequestBody UserNonReg original) {
+    public int add(@RequestBody UserNonReg original) throws MailSendException {
+        try {
 
-        if (userService.existsByEmail(original.getEmail()) ||
-        userNonRegService.existsByEmail(original.getEmail()))
-            return 1;// already exists
-        String code = userNonRegService.sendEmail(original);
-        original.setVerificationCode(code);
-        userNonRegService.saveUser(original);
-        return 0;
-        // return "Checking if Email Available";
+            if (userService.existsByEmail(original.getEmail()) || userNonRegService.existsByEmail(original.getEmail()))
+                return 1;// already exists
+            String code = userNonRegService.sendEmail(original);
+            original.setVerificationCode(code);
+            userNonRegService.saveUser(original);
+            return 0;
+            // return "Checking if Email Available";
+        }
+
+        catch (MailSendException ex) {
+            return 2;
+        }
     }
 
     @PostMapping("/verifycode")
