@@ -97,7 +97,7 @@ export default function LoginPage() {
       </div>
 
       <div>
-        <Paper elevation={2} style={paperStyle}>
+        <Paper elevation={3} style={paperStyle}>
           <Box>
             <Typography fontSize={42} fontWeight={400} gutterBottom>
               Login
