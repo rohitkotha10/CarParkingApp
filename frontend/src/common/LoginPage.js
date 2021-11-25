@@ -18,46 +18,23 @@ export default function LoginPage() {
   const [type, setType] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
-  const [normalLog, setNormal] = React.useState(false)
-  const [googleLog, setGoogle] = React.useState(false)
   const [authenticated, setAuth] = React.useState(5)
-  const [isFirstTime, setFirstTime] = React.useState(true)
-  const [isValid, setValid] = React.useState(true)
+
   let history = useHistory();
 
   const handleTypeChange = (event) => {
     setType(event.target.value);
   }
 
-  React.useEffect(() => {
-    const here = { email };
-    if (email.length == 0)
-      return;
-    console.log(here);
-    fetch("http://localhost:8080/login/googlelogin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(here)
-    }).then(data => data.json())
-      .then((data) => {
-        console.log("Fir :", authenticated);
-        setAuth(data);
-        console.log("Sec :", authenticated);
-        console.log(data);
-        if (data == 0) {
-          history.push('/user');
-        };
-      })
-  }, [googleLog])
+  const handleClick = (e) => {
+    e.preventDefault()
 
-  React.useEffect(() => {
     const userdetails = { email, password, type }
-    if (email.length == 0 || password.length == 0 || type.length == 0)
+    if (email.length == 0 || password.length == 0 || type.length == 0) {
+      setAuth(4);
       return;
+    }
     console.log(userdetails)
-
     fetch("http://localhost:8080/login/normallogin", {
       method: "POST",
       headers: {
@@ -66,29 +43,39 @@ export default function LoginPage() {
       body: JSON.stringify(userdetails)
     }).then(data => data.json())
       .then((data) => {
+        setAuth(data);
         console.log(data);
-        if (data == 0) {
-          history.push('/' + type);
-        };
       })
-  }, [normalLog])
-
-  const handleClick = (e) => {
-    setFirstTime(false);
-    e.preventDefault()
-    setNormal(!normalLog);
   }
 
   const onLoginSuccess = (res) => {
-    setFirstTime(false);
-    setEmail(res.profileObj.email);
-    setGoogle(!googleLog);
+    setType('User');
+
+    const here = { email: res.profileObj.email };
+    console.log(here);
+
+    fetch("http://localhost:8080/login/googlelogin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(here)
+    }).then(data => data.json())
+      .then((data) => {
+        setAuth(data);
+        console.log(data);
+      })
   }
 
   const onLoginFailure = (res) => {
-    setFirstTime(false);
-    console.log('Login Failed:', res);
+    console.log('Google Login Failed', res);
   };
+
+  React.useEffect(() => {
+    if (authenticated == 0) {
+      history.push('/' + type);
+    }
+  }, [authenticated]);
 
   return (
     <Container>
@@ -103,11 +90,13 @@ export default function LoginPage() {
               Login
             </Typography>
           </Box>
-          {(authenticated && isValid && !isFirstTime) && (
+
+          {!(authenticated == 0 || authenticated == 5) && (
             <Typography color="#eb6359">
               Something Wrong! Please Try Again.
             </Typography>
           )}
+
           <Box
             component="form"
             sx={{
@@ -153,12 +142,13 @@ export default function LoginPage() {
               onFailure={onLoginFailure}
             />
           </Box>
+
           <Link to="/register" style={{ textDecoration: 'none', color: "black" }}>
             <Button>
               New User? Sign up here
             </Button>
           </Link>
-            <br />
+          <br />
           <Link to="/verify" style={{ textDecoration: 'none', color: "black" }}>
             <Button>
               Already Registred? Verify Yourself

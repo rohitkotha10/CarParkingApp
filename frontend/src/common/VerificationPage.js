@@ -12,21 +12,21 @@ export default function VerificationPage() {
   const paperStyle = { padding: '50px 20px', width: 600, margin: "20px auto" }
 
   const [email, setEmail] = React.useState('')
-  const [authenticated, setAuth] = React.useState(true)
-  const [regLog, setRegLog] = React.useState(true)
   const [enterCode, setEnterCode] = React.useState('')
-  const [isFirstTime, setFirstTime] = React.useState(true)
+  const [authenticated, setAuth] = React.useState(5)
+
 
   let history = useHistory();
 
   const handleClick = (e) => {
     e.preventDefault()
-    setFirstTime(false);
-    setRegLog(!regLog);
 
-  }
+    if (email.length == 0 ||
+      enterCode.length == 0) {
+      setAuth(4)
+      return;
+    }
 
-  React.useEffect(() => {
     const verifyDetails = { email, enterCode }
     console.log(verifyDetails)
     fetch("http://localhost:8080/register/verifycode", {
@@ -39,12 +39,14 @@ export default function VerificationPage() {
       .then((data) => {
         setAuth(data);
         console.log(data);
-        if (data == 0) {
-          history.push('/');
-        };
-
       })
-  }, [regLog])
+  }
+
+  React.useEffect(() => {
+    if (authenticated == 0) {
+      history.push('/');
+    }
+  }, [authenticated]);
 
   return (
     <Container>
@@ -60,7 +62,7 @@ export default function VerificationPage() {
             </Typography>
           </Box>
 
-          {(authenticated && !isFirstTime) && (
+          {!(authenticated == 0 || authenticated == 5) && (
             <Typography color="#eb6359">
               Something Wrong! Please Try Again.
             </Typography>
@@ -90,7 +92,7 @@ export default function VerificationPage() {
               '& > :not(style)': { m: 2, width: '12ch' },
             }}>
             <Button variant="contained" onClick={handleClick}>
-              register
+              SUBMIT
             </Button>
           </Box>
         </Paper>
