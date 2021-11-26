@@ -6,9 +6,16 @@ import PersonIcon from '@mui/icons-material/Person';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import HistoryIcon from '@mui/icons-material/History';
 
-import { BrowserRouter as Router, Switch, Route, Link  } from "react-router-dom"
+import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function UserDrawer() {
+
+  let history = useHistory();
+  const location = useLocation();
+  const email = location.state.email;
+  const type = location.state.type;
+
   return (
     <Drawer
       style={{ width: '240px' }}
@@ -17,41 +24,41 @@ export default function UserDrawer() {
       open={true}>
 
       <List>
-        <Link to="/user/" style={{ textDecoration: 'none', color: "black" }}>
-          <ListItem button>
+          <ListItem button onClick={()=>{
+            history.push('/User/', {email:email, type:type})
+          }}>
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <ListItemText primary={"HOME"} />
+            <ListItemText primary={"DASHBOARD"} />
           </ListItem>
-        </Link>
 
-        <Link to="/user/booking" style={{ textDecoration: 'none', color: "black" }}>
-          <ListItem button>
+          <ListItem button onClick={()=>{
+            history.push('/User/booking', {email:email, type:type})
+          }}>
             <ListItemIcon>
               <DirectionsCarIcon />
             </ListItemIcon>
             <ListItemText primary={"BOOKING"} />
           </ListItem>
-        </Link>
 
-        <Link to="/user/previousorders" style={{ textDecoration: 'none', color: "black" }}>
-          <ListItem button>
+          <ListItem button onClick={()=>{
+            history.push('/User/previousorders', {email:email, type:type})
+          }}>
             <ListItemIcon>
               <HistoryIcon />
             </ListItemIcon>
             <ListItemText primary={"PREVIOUS ORDERS"} />
           </ListItem>
-        </Link>
 
-        <Link to="/user/profileinfo" style={{ textDecoration: 'none', color: "black" }}>
-          <ListItem button>
+          <ListItem button onClick={()=>{
+            history.push('/User/profileinfo', {email:email, type:type})
+          }}>
             <ListItemIcon>
               <PersonIcon />
             </ListItemIcon>
             <ListItemText primary={"PROFILE INFO"} />
           </ListItem>
-        </Link>
       </List>
 
     </Drawer >

@@ -50,6 +50,7 @@ export default function LoginPage() {
 
   const onLoginSuccess = (res) => {
     setType('User');
+    setEmail(res.profileObj.email);
 
     const here = { email: res.profileObj.email };
     console.log(here);
@@ -73,7 +74,9 @@ export default function LoginPage() {
 
   React.useEffect(() => {
     if (authenticated == 0) {
-      history.push('/' + type);
+      const em = email;
+      console.log(em);
+      history.push('/' + type, {email:email, type:type});
     }
   }, [authenticated]);
 
