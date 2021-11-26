@@ -16,8 +16,9 @@ public class MyOrders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String slotTime;//8digit string format HHMM-HHMM
-    private int rating; //from 1 to 5
+    private String date; // 6digit string format DD-MM-YY
+    private String slotTime;// 8digit string format HHMM-HHMM
+    private int rating; // from 1 to 5
     private int totalPayment;
     private boolean dryCleaning;
     private boolean carWash;
@@ -30,13 +31,37 @@ public class MyOrders {
     private int userID;
     private int workerID;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getDuration() {
         Integer.parseInt(this.slotTime);
         return 1;
     }
-    
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public boolean isAirFill() {
         return airFill;
+    }
+
+    public String getSlotTime() {
+        return slotTime;
+    }
+
+    public void setSlotTime(String slotTime) {
+        this.slotTime = slotTime;
     }
 
     public void setAirFill(boolean airFill) {

@@ -27,6 +27,14 @@ public class UserNonReg {
     private String verificationCode;
     private String enterCode;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getEnterCode() {
         return enterCode;
     }

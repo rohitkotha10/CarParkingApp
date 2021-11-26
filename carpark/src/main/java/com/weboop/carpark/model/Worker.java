@@ -18,11 +18,19 @@ public class Worker {
 
     private String name;
     private String email;
-    private int workExperience; //in hours
+    private int workExperience; // in hours
     private String password;
-    
+
     @ElementCollection
     private Set<Integer> linkedOrderIDs = new HashSet<Integer>();
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Set<Integer> getLinkedOrderIDs() {
         return linkedOrderIDs;
@@ -34,7 +42,7 @@ public class Worker {
 
     public int getRating() {
         return 3;
-        //avg of linkedorder ratings
+        // avg of linkedorder ratings
     }
 
     public String getPassword() {
@@ -70,7 +78,7 @@ public class Worker {
     }
 
     public List<String> getComments() {
-        return new ArrayList<String> ();
-        //get all comments from orderIDs
+        return new ArrayList<String>();
+        // get all comments from orderIDs
     }
 }

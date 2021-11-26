@@ -1,5 +1,7 @@
 package com.weboop.carpark.service;
 
+import java.util.List;
+
 import com.weboop.carpark.model.User;
 import com.weboop.carpark.repository.UserRepository;
 
@@ -20,9 +22,17 @@ public class UserService {
         return userRepository.existsByEmail(email);
     }
 
+    public int removeByEmail(String email) {
+        return userRepository.removeByEmail(email);
+    }
+
     public User saveUser(User user) {
 
         return userRepository.save(user);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     // process login

@@ -24,9 +24,17 @@ public class ParkingSlot {
 
     public int getAvgRating() {
         return 3;
-        //avgs of all linkedOrderRatings
+        // avgs of all linkedOrderRatings
     }
     // get avg rating
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public boolean isOccupied() {
         return Occupied;
