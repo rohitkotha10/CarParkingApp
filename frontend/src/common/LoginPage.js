@@ -12,52 +12,81 @@ import Select from '@mui/material/Select';
 import GoogleLogin from 'react-google-login'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { useHistory } from "react-router-dom";
+import { createTheme, ThemeProvider} from '@mui/material/styles';
+import { makeStyles } from "@material-ui/core/styles";
+import { width } from '@mui/system';
+import { withStyles } from '@material-ui/core';
+const useStyles = makeStyles((theme) => ({
+  select: {
+    '&:before': {
+        borderColor: 'white',
+        background: "#373b3d",
+    },
+    '&:after': {
+        borderColor: 'white',
+        background: "#373b3d",
+    },
+    '&:not(.Mui-disabled):hover::before': {
+        borderColor: 'white',
+        background: "#373b3d",
+    },
+},
+icon: {
+    fill: 'white',
+},
+  root: {
+    "& .MuiFilledInput-root": {
+      background: "#373b3d"
+    },
 
+  },
+}));
+  
 export default function LoginPage() {
   const paperStyle = { padding: '50px 20px', width: 600, margin: "20px auto" }
   const [type, setType] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
-  const [normalLog, setNormal] = React.useState(false)
-  const [googleLog, setGoogle] = React.useState(false)
   const [authenticated, setAuth] = React.useState(5)
-  const [isFirstTime, setFirstTime] = React.useState(true)
-  const [isValid, setValid] = React.useState(true)
+
   let history = useHistory();
+
+  const styletheme = createTheme({
+    palette: {
+      primary: {
+        light: '#757ce8',
+        main: '#3f50b5',
+        dark: '#002884',
+        contrastText: '#fff',
+      },
+      secondary: {
+        
+        dark: '#1d1f20',
+        main: '#303641',
+        background: '#373b3d',
+        contrastText: '#ffffff',
+      },
+      neutral: {
+        main: '#ffffff',
+      },
+    },
+    
+  })
+  const classes = useStyles();
 
   const handleTypeChange = (event) => {
     setType(event.target.value);
   }
 
-  React.useEffect(() => {
-    const here = { email };
-    if (email.length == 0)
-      return;
-    console.log(here);
-    fetch("http://localhost:8080/login/googlelogin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(here)
-    }).then(data => data.json())
-      .then((data) => {
-        console.log("Fir :", authenticated);
-        setAuth(data);
-        console.log("Sec :", authenticated);
-        console.log(data);
-        if (data == 0) {
-          history.push('/user');
-        };
-      })
-  }, [googleLog])
+  const handleClick = (e) => {
+    e.preventDefault()
 
-  React.useEffect(() => {
     const userdetails = { email, password, type }
-    if (email.length == 0 || password.length == 0 || type.length == 0)
+    if (email.length == 0 || password.length == 0 || type.length == 0) {
+      setAuth(4);
       return;
+    }
     console.log(userdetails)
-
     fetch("http://localhost:8080/login/normallogin", {
       method: "POST",
       headers: {
@@ -66,48 +95,64 @@ export default function LoginPage() {
       body: JSON.stringify(userdetails)
     }).then(data => data.json())
       .then((data) => {
+        setAuth(data);
         console.log(data);
-        if (data == 0) {
-          history.push('/' + type);
-        };
       })
-  }, [normalLog])
-
-  const handleClick = (e) => {
-    setFirstTime(false);
-    e.preventDefault()
-    setNormal(!normalLog);
   }
-
   const onLoginSuccess = (res) => {
-    setFirstTime(false);
-    setEmail(res.profileObj.email);
-    setGoogle(!googleLog);
+    setType('User');
+
+    const here = { email: res.profileObj.email };
+    console.log(here);
+
+    fetch("http://localhost:8080/login/googlelogin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(here)
+    }).then(data => data.json())
+      .then((data) => {
+        setAuth(data);
+        console.log(data);
+      })
   }
 
   const onLoginFailure = (res) => {
-    setFirstTime(false);
-    console.log('Login Failed:', res);
+    console.log('Google Login Failed', res);
   };
 
+  React.useEffect(() => {
+    if (authenticated == 0) {
+      history.push('/' + type);
+    }
+  }, [authenticated]);
+
   return (
+    <div>
+    <ThemeProvider theme={styletheme}>
+    <Box 
+    sx={{
+      width: 1536,
+      height: 593,
+      backgroundColor: 'secondary.main',
+    }} pt={20}>
     <Container>
       <div>
-        <Typography fontWeight={700} variant="h3" color="black"> CAR PARKING APP </Typography>
-      </div>
-
-      <div>
-        <Paper elevation={3} style={paperStyle}>
-          <Box>
-            <Typography fontSize={42} fontWeight={400} gutterBottom>
+       
+          <Box sx={{backgroundColor: 'secondary.dark', width: 375, height: 450, borderRadius: 3, boxShadow: 20}} ml={50} >
+          <Box > 
+            <Typography fontSize={42} fontWeight={400} gutterBottom color='secondary.contrastText'>
               Login
             </Typography>
           </Box>
-          {(authenticated && isValid && !isFirstTime) && (
+
+          {!(authenticated == 0 || authenticated == 5) && (
             <Typography color="#eb6359">
               Something Wrong! Please Try Again.
             </Typography>
           )}
+
           <Box
             component="form"
             sx={{
@@ -116,11 +161,11 @@ export default function LoginPage() {
             noValidate
             autoComplete="off"
           >
-            <TextField id="outlined-basic" label="Email" variant="outlined"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+            <TextField id="outlined-basic" label="Email" variant="filled" className={classes.root} InputProps={{ style: {color: "white"} }}
+              value={email} color="neutral"
+              onChange={(e) => setEmail(e.target.value)}       
             />
-            <TextField id="outlined-password-input" label="Password" type="password"
+            <TextField id="outlined-password-input" label="Password" type="password" variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
               value={password}
               onChange={(e) => setPassword(e.target.value)} />
           </Box>
@@ -128,6 +173,15 @@ export default function LoginPage() {
           <FormControl sx={{ m: 1, minWidth: 130 }}>
             <InputLabel id="demo-simple-select-label">Select Role</InputLabel>
             <Select
+            className={classes.select}
+            color="neutral"
+            inputProps={{
+              style: {color: "white"},
+                classes: {
+                    icon: classes.icon,
+                    root: classes.select,                
+                },
+            }}
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={type}
@@ -143,7 +197,7 @@ export default function LoginPage() {
             sx={{
               '& > :not(style)': { m: 2, width: '12ch' },
             }}>
-            <Button variant="contained" onClick={handleClick}>
+            <Button variant="contained" onClick={handleClick} color="secondary">
               Sign In
             </Button>
             <GoogleLogin
@@ -153,20 +207,25 @@ export default function LoginPage() {
               onFailure={onLoginFailure}
             />
           </Box>
+
           <Link to="/register" style={{ textDecoration: 'none', color: "black" }}>
-            <Button>
+            <Button color="neutral">
               New User? Sign up here
             </Button>
           </Link>
-            <br />
+          <br />
           <Link to="/verify" style={{ textDecoration: 'none', color: "black" }}>
-            <Button>
+            <Button color="neutral">
               Already Registred? Verify Yourself
             </Button>
           </Link>
+          </Box>
 
-        </Paper>
+        
       </div>
     </Container >
+    </Box>
+    </ThemeProvider>
+    </div>
   );
 }
