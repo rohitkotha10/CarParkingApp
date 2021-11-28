@@ -17,22 +17,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import { width } from '@mui/system';
 import { withStyles } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
-  select: {
-    '&:before': {
-        borderColor: 'white',
-        background: "#373b3d",
-    },
-    '&:after': {
-        borderColor: 'white',
-        background: "#373b3d",
-    },
-    '&:not(.Mui-disabled):hover::before': {
-        borderColor: 'white',
-        background: "#373b3d",
-    },
+selectstyle: {
+  background: "#373b3d"
 },
-icon: {
-    fill: 'white',
+whiteColor: {
+  color: "white"
 },
   root: {
     "& .MuiFilledInput-root": {
@@ -170,16 +159,16 @@ export default function LoginPage() {
               onChange={(e) => setPassword(e.target.value)} />
           </Box>
 
+          <div>
           <FormControl sx={{ m: 1, minWidth: 130 }}>
-            <InputLabel id="demo-simple-select-label">Select Role</InputLabel>
-            <Select
-            className={classes.select}
+            <InputLabel id="demo-simple-select-label" color="neutral">Select Role</InputLabel>
+            <Select className={classes.selectstyle}
             color="neutral"
             inputProps={{
               style: {color: "white"},
                 classes: {
-                    icon: classes.icon,
-                    root: classes.select,                
+                    icon: classes.whiteColor,
+                    root: classes.whiteColor,                
                 },
             }}
               labelId="demo-simple-select-label"
@@ -193,6 +182,7 @@ export default function LoginPage() {
               <MenuItem value={"User"}> User </MenuItem>
             </Select>
           </FormControl>
+          </div>
           <Box
             sx={{
               '& > :not(style)': { m: 2, width: '12ch' },
