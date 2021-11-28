@@ -18,19 +18,13 @@ export default function RegisterPage() {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [passwordc, setPasswordc] = React.useState('')
-  const [authenticated, setAuth] = React.useState(true)
-  const [regLog, setRegLog] = React.useState(true)
-  const [isFirstTime, setFirstTime] = React.useState(true)
+  const [authenticated, setAuth] = React.useState(5)
 
   let history = useHistory();
 
   const handleClick = (e) => {
     e.preventDefault()
-    setFirstTime(false);
-    setRegLog(!regLog);
-  }
 
-  React.useEffect(() => {
     if (firstName.length == 0 ||
       lastName.length == 0 ||
       address.length == 0 ||
@@ -38,8 +32,11 @@ export default function RegisterPage() {
       carNumber.length == 0 ||
       email.length == 0 ||
       password.length == 0 ||
-      password != passwordc)
+      password != passwordc) {
+      setAuth(4)
       return;
+    }
+
     const userdetails = { firstName, lastName, address, mobileNumber, carNumber, email, password }
     console.log(userdetails)
     fetch("http://localhost:8080/register/input", {
@@ -52,11 +49,14 @@ export default function RegisterPage() {
       .then((data) => {
         setAuth(data);
         console.log(data);
-        if (data == 0) {
-          history.push('/verify');
-        };
       })
-  }, [regLog])
+  }
+
+  React.useEffect(() => {
+    if (authenticated == 0) {
+      history.push('/verify');
+    }
+  }, [authenticated]);
 
   return (
     <Container>
@@ -72,7 +72,7 @@ export default function RegisterPage() {
             </Typography>
           </Box>
 
-          {(authenticated && !isFirstTime) && (
+          {!(authenticated == 0 || authenticated == 5) && (
             <Typography color="#eb6359">
               Something Wrong! Please Try Again.
             </Typography>
@@ -139,6 +139,7 @@ export default function RegisterPage() {
               register
             </Button>
           </Box>
+
         </Paper>
       </div>
     </Container >
