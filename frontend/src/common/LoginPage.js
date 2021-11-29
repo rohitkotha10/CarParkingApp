@@ -13,7 +13,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { useHistory } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { makeStyles } from "@mui/styles";
-import { SeventeenMpOutlined } from '@mui/icons-material';
+
 const useStyles = makeStyles(() => ({
   selectstyle: {
     background: "#373b3d"
@@ -85,11 +85,10 @@ export default function LoginPage() {
         console.log(data);
       })
   }
-  
+
   const onLoginSuccess = (res) => {
     setType('User');
     setEmail(res.profileObj.email);
-    SeventeenMpOutlined(res.profileObj.email);
 
     const here = { email: res.profileObj.email };
     console.log(here);
@@ -115,7 +114,7 @@ export default function LoginPage() {
     if (authenticated == 0) {
       const em = email;
       console.log(em);
-      history.push('/' + type, {email:email, type:type});
+      history.push('/' + type, { email: email, type: type });
     }
   }, [authenticated]);
 

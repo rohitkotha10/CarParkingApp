@@ -3,9 +3,9 @@ package com.weboop.carpark.controller;
 import java.util.List;
 
 import com.weboop.carpark.model.MyOrders;
-import com.weboop.carpark.model.Worker;
+import com.weboop.carpark.model.ParkingSlot;
 import com.weboop.carpark.service.MyOrdersService;
-import com.weboop.carpark.service.WorkerService;
+import com.weboop.carpark.service.ParkingService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,71 +16,70 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/worker")
+@RequestMapping("/parking")
 @CrossOrigin
-public class WorkerController {
+public class ParkingController {
     @Autowired
-    private WorkerService workerService;
+    private ParkingService parkingService;
 
     @Autowired
     private MyOrdersService myOrdersService;
 
     @PostMapping("/getinfo")
-    public Worker getInfo(@RequestBody Worker details) {
+    public ParkingSlot getInfo(@RequestBody ParkingSlot details) {
         try {
-            Worker cur = workerService.findByEmail(details.getEmail());
+            ParkingSlot cur = parkingService.findByLocation(details.getLocation());
             return cur;
         } catch (Exception e) {
-            return new Worker();
+            return new ParkingSlot();
         }
     }
 
-    @PostMapping("/addworker")
-    public int addWorker(@RequestBody Worker details) {
+    @PostMapping("/addparking")
+    public int addparking(@RequestBody ParkingSlot details) {
         try {
-            if (workerService.existsByEmail(details.getEmail()))
+            if (parkingService.existsByLocation(details.getLocation()))
                 return 1;// already exists
-            workerService.saveWorker(details);
+            parkingService.saveParkingSlot(details);
             return 0;
         } catch (Exception e) {
             return 9;
         }
     }
 
-    @PostMapping("/removeworker")
-    public int removeWorker(@RequestBody Worker details) {
+    @PostMapping("/removeparking")
+    public int removeParking(@RequestBody ParkingSlot details) {
         try {
-            if (!workerService.existsByEmail(details.getEmail()))
+            if (!parkingService.existsByLocation(details.getLocation()))
                 return 1;// not exists
-            workerService.removeByEmail(details.getEmail());
+            parkingService.removeByLocation(details.getLocation());
             return 0;
         } catch (Exception e) {
             return 9;
         }
     }
 
-    @GetMapping("/getallworkers")
-    public List<Worker> getAllOrders() {
-        return workerService.getAllWorkers();
+    @GetMapping("/getallparking")
+    public List<ParkingSlot> getAllOrders() {
+        return parkingService.getAllParking();
     }
 
-    @PostMapping("/getorders")
-    public List<MyOrders> getOrders(@RequestBody Worker details) {
+    public List<MyOrders> getOrders(@RequestBody ParkingSlot details) {
         try {
-            if (!workerService.existsByEmail(details.getEmail()))
+            if (!parkingService.existsByLocation(details.getLocation()))
                 return null;// not exists
-            return myOrdersService.findByWorkerEmail(details.getEmail());
+            return myOrdersService.findByParkingSlotLocation(details.getLocation());
         } catch (Exception e) {
             return null;
         }
     }
 
     @PostMapping("/getrating")
-    public int getRating(@RequestBody Worker details) {
+    public int getRating(@RequestBody ParkingSlot details) {
         try {
-            if (!workerService.existsByEmail(details.getEmail()))
+            if (!parkingService.existsByLocation(details.getLocation()))
                 return -1;// not exists
-            List<MyOrders> related = myOrdersService.findByWorkerEmail(details.getEmail());
+            List<MyOrders> related = myOrdersService.findByParkingSlotLocation(details.getLocation());
             if (related.size() == 0)
                 return 0;
 
@@ -93,5 +92,4 @@ public class WorkerController {
             return 9;
         }
     }
-
 }

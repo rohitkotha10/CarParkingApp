@@ -6,6 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AdminRepository extends JpaRepository<Admin, Integer>{
+public interface AdminRepository extends JpaRepository<Admin, Integer> {
+
     public Admin findByEmail(String email);
+
+    boolean existsByEmail(String email);
+
+    public int removeByEmail(String email);
 }
