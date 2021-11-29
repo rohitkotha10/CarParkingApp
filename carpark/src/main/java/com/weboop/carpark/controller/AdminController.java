@@ -28,8 +28,4 @@ public class AdminController {
             return new Admin();
         }
     }
-
-    // process cancellation, modification requests
-    // upon cancellation forward to waiting list
-    // view all the works going on now
 }

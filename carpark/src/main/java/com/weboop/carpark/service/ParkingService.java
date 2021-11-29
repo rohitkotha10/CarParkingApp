@@ -34,7 +34,4 @@ public class ParkingService {
     public List<ParkingSlot> getAllParking() {
         return parkingRepository.findAll();
     }
-
-    // process login
-    // get all Parking list
 }

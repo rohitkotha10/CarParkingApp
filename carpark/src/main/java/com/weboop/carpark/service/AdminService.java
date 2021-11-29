@@ -28,7 +28,4 @@ public class AdminService {
 
         return adminRepository.save(admin);
     }
-
-    // process login/register details
-    // get all Admin list
 }

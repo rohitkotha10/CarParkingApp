@@ -34,7 +34,4 @@ public class WorkerService {
     public List<Worker> getAllWorkers() {
         return workerRepository.findAll();
     }
-
-    // process login/register details
-    // get all Worker list
 }

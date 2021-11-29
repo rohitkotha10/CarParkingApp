@@ -1,8 +1,5 @@
 package com.weboop.carpark.model;
 
-import java.util.*;
-
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "parking_slots")
+@Table(name = "parking_slot")
 public class ParkingSlot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,15 +15,6 @@ public class ParkingSlot {
 
     private String location;
     private boolean Occupied;
-
-    @ElementCollection
-    private Set<Integer> linkedOrderIDs = new HashSet<Integer>();
-
-    public int getAvgRating() {
-        return 3;
-        // avgs of all linkedOrderRatings
-    }
-    // get avg rating
 
     public int getId() {
         return id;
@@ -50,14 +38,6 @@ public class ParkingSlot {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public Set<Integer> getLinkedOrderIDs() {
-        return linkedOrderIDs;
-    }
-
-    public void setLinkedOrderIDs(Set<Integer> linkedOrderIDs) {
-        this.linkedOrderIDs = linkedOrderIDs;
     }
 }
 // SlotNumber, location

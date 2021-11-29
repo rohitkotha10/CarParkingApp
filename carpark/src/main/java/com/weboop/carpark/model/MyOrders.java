@@ -27,21 +27,40 @@ public class MyOrders {
     @ElementCollection
     private List<String> comments = new ArrayList<String>();
 
-    private int ParkingSlotID;
-    private int userID;
-    private int workerID;
+    private String parkingSlotLocation;
+    private String userEmail;
+    private String workerEmail;
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getParkingSlotLocation() {
+        return parkingSlotLocation;
     }
 
-    public int getDuration() {
-        Integer.parseInt(this.slotTime);
-        return 1;
+    public void setParkingSlotLocation(String parkingSlotLocation) {
+        this.parkingSlotLocation = parkingSlotLocation;
+    }
+
+    public String getWorkerEmail() {
+        return workerEmail;
+    }
+
+    public void setWorkerEmail(String workerEmail) {
+        this.workerEmail = workerEmail;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDate() {
@@ -84,30 +103,6 @@ public class MyOrders {
         this.dryCleaning = dryCleaning;
     }
 
-    public int getWorkerID() {
-        return workerID;
-    }
-
-    public void setWorkerID(int workerID) {
-        this.workerID = workerID;
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
-    public int getParkingSlotID() {
-        return ParkingSlotID;
-    }
-
-    public void setParkingSlotID(int parkingSlotID) {
-        this.ParkingSlotID = parkingSlotID;
-    }
-
     public int getTotalPayment() {
         return totalPayment;
     }
@@ -123,15 +118,4 @@ public class MyOrders {
     public void setRating(int rating) {
         this.rating = rating;
     }
-
-    public int calculatePayment() {
-        return 100;
-    }
-
-    // Unique ID
-    // Linked parking spot, time, duration services
-    // display/calculate payment
-    // payment details, user, worker
-    // segregate into past/current or future
-    // time, rating, comments
 }

@@ -1,8 +1,5 @@
 package com.weboop.carpark.model;
 
-import java.util.*;
-
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,28 +18,12 @@ public class Worker {
     private int workExperience; // in hours
     private String password;
 
-    @ElementCollection
-    private Set<Integer> linkedOrderIDs = new HashSet<Integer>();
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Set<Integer> getLinkedOrderIDs() {
-        return linkedOrderIDs;
-    }
-
-    public void setLinkedOrderIDs(Set<Integer> linkedOrderIDs) {
-        this.linkedOrderIDs = linkedOrderIDs;
-    }
-
-    public int getRating() {
-        return 3;
-        // avg of linkedorder ratings
     }
 
     public String getPassword() {
@@ -75,10 +56,5 @@ public class Worker {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<String> getComments() {
-        return new ArrayList<String>();
-        // get all comments from orderIDs
     }
 }

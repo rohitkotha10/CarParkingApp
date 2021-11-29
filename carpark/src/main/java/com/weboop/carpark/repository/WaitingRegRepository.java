@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WaitingRegRepository extends JpaRepository<UserNonReg, Integer> {
+
     public UserNonReg findByEmail(String email);
 
     public boolean existsByEmail(String email);

@@ -1,9 +1,6 @@
 package com.weboop.carpark.model;
 
-import java.util.*;
-
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,9 +24,6 @@ public class User {
 
     private String password;
 
-    @ElementCollection
-    private Set<Integer> linkedOrderIDs = new HashSet<Integer>();
-
     public int getId() {
         return id;
     }
@@ -44,14 +38,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Set<Integer> getLinkedOrderIDs() {
-        return linkedOrderIDs;
-    }
-
-    public void setLinkedOrderIDs(Set<Integer> linkedOrderIDs) {
-        this.linkedOrderIDs = linkedOrderIDs;
     }
 
     public String getCarNumber() {

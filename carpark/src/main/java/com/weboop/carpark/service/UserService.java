@@ -35,6 +35,5 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    // process login
-    // get all user list
+    //feedback form, payment confirmations
 }

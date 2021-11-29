@@ -18,6 +18,18 @@ public class MyOrdersService {
         return myOrdersRepository.findBySlotTime(slotTime);
     }
 
+    public List<MyOrders> findByUserEmail(String userEmail) {
+        return myOrdersRepository.findByUserEmail(userEmail);
+    }
+
+    public List<MyOrders> findByParkingSlotLocation(String parkingSlotLocation) {
+        return myOrdersRepository.findByParkingSlotLocation(parkingSlotLocation);
+    }
+
+    public List<MyOrders> findByWorkerEmail(String workerEmail) {
+        return myOrdersRepository.findByWorkerEmail(workerEmail);
+    }
+
     public boolean existsBySlotTime(String slotTime) {
         return myOrdersRepository.existsBySlotTime(slotTime);
     }

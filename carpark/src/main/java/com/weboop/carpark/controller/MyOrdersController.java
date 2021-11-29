@@ -33,8 +33,10 @@ public class MyOrdersController {
     @PostMapping("/addmyorders")
     public int addmyOrders(@RequestBody MyOrders details) {
         try {
-            if (myOrdersService.existsBySlotTime(details.getSlotTime()))
-                return 1;// already exists
+            if (myOrdersService.existsBySlotTime(details.getSlotTime())) {
+
+                return 1;// already exists, forward to waiting list
+            }
             myOrdersService.saveMyOrders(details);
             return 0;
         } catch (Exception e) {
@@ -60,3 +62,8 @@ public class MyOrdersController {
     }
 
 }
+// add comments
+// go to waiting list
+// get payment
+// manage cancellations
+// timestamps
