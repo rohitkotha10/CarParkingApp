@@ -7,9 +7,9 @@ import Paper from '@mui/material/Paper';
 import Container from '@mui/material/Container';
 import { useHistory } from "react-router-dom";
 import { createTheme, ThemeProvider} from '@mui/material/styles';
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import { width } from '@mui/system';
-import { withStyles } from '@material-ui/core';
+import { withStyles } from "@mui/styles";
 
 
 const useStyles = makeStyles((theme) => ({
