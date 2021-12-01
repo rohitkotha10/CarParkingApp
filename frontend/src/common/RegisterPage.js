@@ -6,6 +6,37 @@ import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Container from '@mui/material/Container';
 import { useHistory } from "react-router-dom";
+import { createTheme, ThemeProvider} from '@mui/material/styles';
+import { makeStyles } from "@material-ui/core/styles";
+import { width } from '@mui/system';
+import { withStyles } from '@material-ui/core';
+import { Grid } from '@mui/material';
+
+const useStyles = makeStyles((theme) => ({
+  select: {
+    '&:before': {
+        borderColor: 'white',
+        background: "#373b3d",
+    },
+    '&:after': {
+        borderColor: 'white',
+        background: "#373b3d",
+    },
+    '&:not(.Mui-disabled):hover::before': {
+        borderColor: 'white',
+        background: "#373b3d",
+    },
+},
+icon: {
+    fill: 'white',
+},
+  root: {
+    "& .MuiFilledInput-root": {
+      background: "#373b3d"
+    },
+
+  },
+}));
 
 export default function RegisterPage() {
 
@@ -21,6 +52,36 @@ export default function RegisterPage() {
   const [authenticated, setAuth] = React.useState(5)
 
   let history = useHistory();
+
+  const styletheme = createTheme({
+    typography: {
+      
+      fontFamily: [
+        'Chilanka',
+        'cursive',
+      ].join(','),},
+    palette: {
+      primary: {
+        light: '#757ce8',
+        main: '#3f50b5',
+        dark: '#002884',
+        contrastText: '#fff',
+      },
+      secondary: {
+        
+        dark: '#1d1f20',
+        main: '#303641',
+        background: '#373b3d',
+        contrastText: '#ffffff',
+      },
+      neutral: {
+        main: '#ffffff',
+      },
+    },
+    
+  })
+  const classes = useStyles();
+
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -59,15 +120,24 @@ export default function RegisterPage() {
   }, [authenticated]);
 
   return (
-    <Container>
-      <div>
-        <Typography fontWeight={700} variant="h3" color="black"> CAR PARKING APP </Typography>
-      </div>
+    <div>
+    <ThemeProvider theme={styletheme}>
+    <Box 
+    sx={{
+      width: 1536,
+      height: 593,
+      backgroundColor: 'secondary.main',
+    }} pt={20}>
+
+
+    <Box sx={{ justifyContent: 'center' }}>
 
       <div>
-        <Paper elevation={2} style={paperStyle}>
+        
+      <Box sx={{backgroundColor: 'secondary.dark', width: 580, height: 462, borderRadius: 3, boxShadow: 20}} ml={50} >
+        
           <Box>
-            <Typography fontSize={42} fontWeight={400} gutterBottom>
+          <Typography fontSize={42} fontWeight={400} gutterBottom color='secondary.contrastText'>
               Registration Form
             </Typography>
           </Box>
@@ -86,41 +156,41 @@ export default function RegisterPage() {
             noValidate
             autoComplete="off"
           >
-            <TextField id="outlined-basic" label="First Name" variant="outlined"
+            <TextField id="outlined-basic" label="First Name"  variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
 
-            <TextField id="outlined-basic" label="Last Name" variant="outlined"
+            <TextField id="outlined-basic" label="Last Name" variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
 
-            <TextField id="outlined-basic" label="Address" variant="outlined"
+            <TextField id="outlined-basic" label="Address" variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
 
-            <TextField id="outlined-basic" label="Mobile No." variant="outlined"
+            <TextField id="outlined-basic" label="Mobile No." variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
               value={mobileNumber}
               onChange={(e) => setMobileNumber(e.target.value)}
             />
 
-            <TextField id="outlined-basic" label="Car Number" variant="outlined"
+            <TextField id="outlined-basic" label="Car Number" variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
               value={carNumber}
               onChange={(e) => setCarNumber(e.target.value)}
             />
 
-            <TextField id="outlined-basic" label="Email" variant="outlined"
+            <TextField id="outlined-basic" label="Email" variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
 
-            <TextField id="outlined-password-input" label="Password" type="password"
+            <TextField id="outlined-password-input" label="Password" type="password" variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
               value={password}
               onChange={(e) => setPassword(e.target.value)} />
 
-            <TextField id="outlined-password-input" label="Confirm Password" type="password"
+            <TextField id="outlined-password-input" label="Confirm Password" type="password" variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
               value={passwordc}
               onChange={(e) => setPasswordc(e.target.value)} />
 
@@ -135,16 +205,19 @@ export default function RegisterPage() {
             sx={{
               '& > :not(style)': { m: 2, width: '12ch' },
             }}>
-            <Button variant="contained" onClick={handleClick}>
+            <Button variant="contained" onClick={handleClick} color="secondary">
               register
             </Button>
           </Box>
 
-        </Paper>
+        </Box>
       </div>
-    </Container >
-  )
-
+    </Box>
+    
+    </Box>
+    </ThemeProvider>
+    </div>
+  ); 
 }
 
 

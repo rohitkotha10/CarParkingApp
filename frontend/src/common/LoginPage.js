@@ -14,6 +14,7 @@ import { useHistory } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { makeStyles } from "@mui/styles";
 
+
 const useStyles = makeStyles(() => ({
   selectstyle: {
     background: "#373b3d"
@@ -38,6 +39,13 @@ export default function LoginPage() {
   let history = useHistory();
 
   const styletheme = createTheme({
+    typography: {
+
+      fontFamily: [
+        'Chilanka',
+        'cursive',
+      ].join(','),
+    },
     palette: {
       primary: {
         light: '#757ce8',
@@ -85,7 +93,6 @@ export default function LoginPage() {
         console.log(data);
       })
   }
-
   const onLoginSuccess = (res) => {
     setType('User');
     setEmail(res.profileObj.email);
@@ -127,10 +134,11 @@ export default function LoginPage() {
             height: 593,
             backgroundColor: 'secondary.main',
           }} pt={20}>
-          <Container>
+
+          <Container sx={{ justifyContent: 'center' }} >
             <div>
 
-              <Box sx={{ backgroundColor: 'secondary.dark', width: 375, height: 450, borderRadius: 3, boxShadow: 20 }} ml={50} >
+              <Box sx={{ backgroundColor: 'secondary.dark', width: 375, height: 470, borderRadius: 3, boxShadow: 20 }} ml={50} >
                 <Box >
                   <Typography fontSize={42} fontWeight={400} gutterBottom color='secondary.contrastText'>
                     Login
@@ -160,30 +168,28 @@ export default function LoginPage() {
                     onChange={(e) => setPassword(e.target.value)} />
                 </Box>
 
-                <div>
-                  <FormControl sx={{ m: 1, minWidth: 130 }}>
-                    <InputLabel id="demo-simple-select-label" color="neutral">Select Role</InputLabel>
-                    <Select className={classes.selectstyle}
-                      color="neutral"
-                      inputProps={{
-                        style: { color: "white" },
-                        classes: {
-                          icon: classes.whiteColor,
-                          root: classes.whiteColor,
-                        },
-                      }}
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={type}
-                      label="Select Role"
-                      onChange={handleTypeChange}
-                    >
-                      <MenuItem value={"Admin"}> Admin </MenuItem>
-                      <MenuItem value={"Worker"}> Worker </MenuItem>
-                      <MenuItem value={"User"}> User </MenuItem>
-                    </Select>
-                  </FormControl>
-                </div>
+                <FormControl sx={{ m: 1, minWidth: 130 }} color="neutral" >
+                  <InputLabel id="demo-simple-select-label">Select Role</InputLabel>
+                  <Select className={classes.selectstyle}
+                    color="neutral"
+                    inputProps={{
+                      style: { color: "white" },
+                      classes: {
+                        icon: classes.whiteColor,
+                        root: classes.whiteColor,
+                      },
+                    }}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={type}
+                    label="Select Role"
+                    onChange={handleTypeChange}
+                  >
+                    <MenuItem value={"Admin"} color="neutral"> Admin </MenuItem>
+                    <MenuItem value={"Worker"}> Worker </MenuItem>
+                    <MenuItem value={"User"}> User </MenuItem>
+                  </Select>
+                </FormControl>
                 <Box
                   sx={{
                     '& > :not(style)': { m: 2, width: '12ch' },
