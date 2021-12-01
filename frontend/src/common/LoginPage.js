@@ -12,7 +12,39 @@ import Select from '@mui/material/Select';
 import GoogleLogin from 'react-google-login'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { useHistory } from "react-router-dom";
+import { createTheme, ThemeProvider} from '@mui/material/styles';
+import { makeStyles } from "@material-ui/core/styles";
+import { width } from '@mui/system';
+import { withStyles } from '@material-ui/core';
 
+
+const useStyles = makeStyles((theme) => ({
+ 
+  select: {
+    '&:before': {
+        borderColor: 'white',
+        background: "#373b3d",
+    },
+    '&:after': {
+        borderColor: 'white',
+        background: "#373b3d",
+    },
+    '&:not(.Mui-disabled):hover::before': {
+        borderColor: 'white',
+        background: "#373b3d",
+    },
+},
+icon: {
+    fill: 'white',
+},
+  root: {
+    "& .MuiFilledInput-root": {
+      background: "#373b3d"
+    },
+
+  },
+}));
+  
 export default function LoginPage() {
   const paperStyle = { padding: '50px 20px', width: 600, margin: "20px auto" }
   const [type, setType] = React.useState('')
@@ -21,6 +53,35 @@ export default function LoginPage() {
   const [authenticated, setAuth] = React.useState(5)
 
   let history = useHistory();
+
+  const styletheme = createTheme({
+    typography: {
+      
+      fontFamily: [
+        'Chilanka',
+        'cursive',
+      ].join(','),},
+    palette: {
+      primary: {
+        light: '#757ce8',
+        main: '#3f50b5',
+        dark: '#002884',
+        contrastText: '#fff',
+      },
+      secondary: {
+        
+        dark: '#1d1f20',
+        main: '#303641',
+        background: '#373b3d',
+        contrastText: '#ffffff',
+      },
+      neutral: {
+        main: '#ffffff',
+      },
+    },
+    
+  })
+  const classes = useStyles();
 
   const handleTypeChange = (event) => {
     setType(event.target.value);
@@ -47,7 +108,6 @@ export default function LoginPage() {
         console.log(data);
       })
   }
-
   const onLoginSuccess = (res) => {
     setType('User');
 
@@ -78,15 +138,21 @@ export default function LoginPage() {
   }, [authenticated]);
 
   return (
-    <Container>
-      <div>
-        <Typography fontWeight={700} variant="h3" color="black"> CAR PARKING APP </Typography>
-      </div>
+    <div>
+    <ThemeProvider theme={styletheme}>
+    <Box 
+    sx={{
+      width: 1536,
+      height: 593,
+      backgroundColor: 'secondary.main',
+    }} pt={20}>
 
+    <Container sx={{ justifyContent: 'center' }} >
       <div>
-        <Paper elevation={2} style={paperStyle}>
-          <Box>
-            <Typography fontSize={42} fontWeight={400} gutterBottom>
+       
+          <Box sx={{backgroundColor: 'secondary.dark', width: 375, height: 470, borderRadius: 3, boxShadow: 20}} ml={50} >
+          <Box > 
+            <Typography fontSize={42} fontWeight={400} gutterBottom color='secondary.contrastText'>
               Login
             </Typography>
           </Box>
@@ -105,25 +171,35 @@ export default function LoginPage() {
             noValidate
             autoComplete="off"
           >
-            <TextField id="outlined-basic" label="Email" variant="outlined"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+            <TextField id="outlined-basic" label="Email" variant="filled" className={classes.root} InputProps={{ style: {color: "white"} }}
+              value={email} color="neutral"
+              onChange={(e) => setEmail(e.target.value)}       
             />
-            <TextField id="outlined-password-input" label="Password" type="password"
+            <TextField id="outlined-password-input" label="Password" type="password" variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
               value={password}
               onChange={(e) => setPassword(e.target.value)} />
           </Box>
 
-          <FormControl sx={{ m: 1, minWidth: 130 }}>
+          <FormControl sx={{ m: 1, minWidth: 130 }} color="neutral" >
             <InputLabel id="demo-simple-select-label">Select Role</InputLabel>
             <Select
+            className={classes.select}
+            color="neutral"
+            
+            inputProps={{
+              style: {color: "white"},
+                classes: {
+                    icon: classes.icon,
+                    root: classes.select,                
+                },
+            }}
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={type}
-              label="Select Role"
+              label="Select Role" 
               onChange={handleTypeChange}
             >
-              <MenuItem value={"Admin"}> Admin </MenuItem>
+              <MenuItem value={"Admin"} color="neutral"> Admin </MenuItem>
               <MenuItem value={"Worker"}> Worker </MenuItem>
               <MenuItem value={"User"}> User </MenuItem>
             </Select>
@@ -132,7 +208,7 @@ export default function LoginPage() {
             sx={{
               '& > :not(style)': { m: 2, width: '12ch' },
             }}>
-            <Button variant="contained" onClick={handleClick}>
+            <Button variant="contained" onClick={handleClick} color="secondary">
               Sign In
             </Button>
             <GoogleLogin
@@ -144,19 +220,23 @@ export default function LoginPage() {
           </Box>
 
           <Link to="/register" style={{ textDecoration: 'none', color: "black" }}>
-            <Button>
+            <Button color="neutral">
               New User? Sign up here
             </Button>
           </Link>
           <br />
           <Link to="/verify" style={{ textDecoration: 'none', color: "black" }}>
-            <Button>
+            <Button color="neutral">
               Already Registred? Verify Yourself
             </Button>
           </Link>
+          </Box>
 
-        </Paper>
+        
       </div>
     </Container >
+    </Box>
+    </ThemeProvider>
+    </div>
   );
 }
