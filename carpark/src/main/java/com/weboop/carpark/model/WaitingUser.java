@@ -13,19 +13,30 @@ public class WaitingUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int userID;
-    private int parkingSlotID;
-    
-    public int getUserID() {
-        return userID;
+    private String userEmail;
+    private String parkingLocation;
+
+    public int getId() {
+        return id;
     }
-    public int getParkingSlotID() {
-        return parkingSlotID;
+
+    public String getUserEmail() {
+        return userEmail;
     }
-    public void setParkingSlotID(int parkingSlotID) {
-        this.parkingSlotID = parkingSlotID;
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
-    public void setUserID(int userID) {
-        this.userID = userID;
+
+    public String getParkingLocation() {
+        return parkingLocation;
+    }
+
+    public void setParkingLocation(String parkingLocation) {
+        this.parkingLocation = parkingLocation;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

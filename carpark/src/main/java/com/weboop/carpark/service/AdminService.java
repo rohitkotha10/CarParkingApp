@@ -10,18 +10,22 @@ import org.springframework.stereotype.Service;
 public class AdminService {
 
     @Autowired
-    private AdminRepository AdminRepository;
-
+    private AdminRepository adminRepository;
 
     public Admin findByEmail(String email) {
-        return AdminRepository.findByEmail(email);
+        return adminRepository.findByEmail(email);
     }
 
-    public Admin saveAdmin(Admin Admin) {
-        
-        return AdminRepository.save(Admin); 
+    public boolean existsByEmail(String email) {
+        return adminRepository.existsByEmail(email);
     }
 
-    //process login/register details
-    //get all Admin list
+    public int removeByEmail(String email) {
+        return adminRepository.removeByEmail(email);
+    }
+
+    public Admin saveAdmin(Admin admin) {
+
+        return adminRepository.save(admin);
+    }
 }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserNonRegService {
-    
+
     @Autowired
     private WaitingRegRepository waitRegRepository;
 
@@ -48,7 +48,4 @@ public class UserNonRegService {
     public int removeByEmail(String email) {
         return waitRegRepository.removeByEmail(email);
     }
-
-    // process login/register details
-    // get all user list
 }

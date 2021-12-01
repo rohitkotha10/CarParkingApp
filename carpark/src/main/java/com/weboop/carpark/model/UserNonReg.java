@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "userNonReg")
+@Table(name = "user_non_reg")
 public class UserNonReg {
 
     @Id
@@ -26,6 +26,14 @@ public class UserNonReg {
     private String password;
     private String verificationCode;
     private String enterCode;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getEnterCode() {
         return enterCode;

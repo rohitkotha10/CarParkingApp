@@ -6,9 +6,16 @@ import PersonIcon from '@mui/icons-material/Person';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import HistoryIcon from '@mui/icons-material/History';
 
-import { BrowserRouter as Router, Switch, Route, Link  } from "react-router-dom"
+import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function AdminDrawer() {
+
+  let history = useHistory();
+  const location = useLocation();
+  const email = location.state.email;
+  const type = location.state.type;
+
   return (
     <Drawer
       style={{ width: '240px' }}
@@ -17,50 +24,50 @@ export default function AdminDrawer() {
       open={true}>
 
       <List>
-        <Link to="/admin/" style={{ textDecoration: 'none', color: "black" }}>
-          <ListItem button>
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary={"HOME"} />
-          </ListItem>
-        </Link>
+        <ListItem button onClick={() => {
+          history.push('/Admin/', { email: email, type: type })
+        }}>
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary={"DASHBOARD"} />
+        </ListItem>
 
-        <Link to="/admin/parkingspots" style={{ textDecoration: 'none', color: "black" }}>
-          <ListItem button>
-            <ListItemIcon>
-              <DirectionsCarIcon />
-            </ListItemIcon>
-            <ListItemText primary={"PARKING SPOTS"} />
-          </ListItem>
-        </Link>
+        <ListItem button onClick={() => {
+          history.push('/Admin/parkingspots', { email: email, type: type })
+        }}>
+          <ListItemIcon>
+            <DirectionsCarIcon />
+          </ListItemIcon>
+          <ListItemText primary={"PARKING SPOTS"} />
+        </ListItem>
 
-        <Link to="/admin/orders" style={{ textDecoration: 'none', color: "black" }}>
-          <ListItem button>
-            <ListItemIcon>
-              <HistoryIcon />
-            </ListItemIcon>
-            <ListItemText primary={"ORDERS"} />
-          </ListItem>
-        </Link>
+        <ListItem button onClick={() => {
+          history.push('/Admin/orders', { email: email, type: type })
+        }}>
+          <ListItemIcon>
+            <HistoryIcon />
+          </ListItemIcon>
+          <ListItemText primary={"ORDERS"} />
+        </ListItem>
 
-        <Link to="/admin/allusers" style={{ textDecoration: 'none', color: "black" }}>
-          <ListItem button>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText primary={"ALL USERS"} />
-          </ListItem>
-        </Link>
+        <ListItem button onClick={() => {
+          history.push('/Admin/allusers', { email: email, type: type })
+        }}>
+          <ListItemIcon>
+            <PersonIcon />
+          </ListItemIcon>
+          <ListItemText primary={"ALL USERS"} />
+        </ListItem>
 
-        <Link to="/admin/allworkers" style={{ textDecoration: 'none', color: "black" }}>
-          <ListItem button>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText primary={"ALL WORKERS"} />
-          </ListItem>
-        </Link>
+        <ListItem button onClick={() => {
+          history.push('/Admin/allworkers', { email: email, type: type })
+        }}>
+          <ListItemIcon>
+            <PersonIcon />
+          </ListItemIcon>
+          <ListItemText primary={"ALL WORKERS"} />
+        </ListItem>
       </List>
 
     </Drawer>

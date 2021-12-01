@@ -7,5 +7,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WorkerRepository extends JpaRepository<Worker, Integer> {
+
     public Worker findByEmail(String email);
+
+    boolean existsByEmail(String email);
+
+    public int removeByEmail(String email);
 }

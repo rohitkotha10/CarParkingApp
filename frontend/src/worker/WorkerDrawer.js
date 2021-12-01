@@ -1,14 +1,21 @@
 import React from 'react'
-import { Drawer, List, ListItem, ListItemIcon, ListItemText} from '@mui/material'
+import { Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 
 import HomeIcon from "@mui/icons-material/Home"
 import PersonIcon from '@mui/icons-material/Person';
 import CommentIcon from '@mui/icons-material/Comment';
 import HistoryIcon from '@mui/icons-material/History';
 
-import { BrowserRouter as Router, Switch, Route, Link  } from "react-router-dom"
+import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function WorkerDrawer() {
+
+  let history = useHistory();
+  const location = useLocation();
+  const email = location.state.email;
+  const type = location.state.type;
+
   return (
     <Drawer
       style={{ width: '240px' }}
@@ -17,41 +24,41 @@ export default function WorkerDrawer() {
       open={true}>
 
       <List>
-        <Link to="/worker/" style={{ textDecoration: 'none', color: "black" }}>
-          <ListItem button>
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary={"HOME"} />
-          </ListItem>
-        </Link>
+        <ListItem button onClick={() => {
+          history.push('/Worker/', { email: email, type: type })
+        }}>
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary={"DASHBOARD"} />
+        </ListItem>
 
-        <Link to="/worker/orders" style={{ textDecoration: 'none', color: "black" }}>
-          <ListItem button>
-            <ListItemIcon>
-              <HistoryIcon />
-            </ListItemIcon>
-            <ListItemText primary={"ORDERS"} />
-          </ListItem>
-        </Link>
+        <ListItem button onClick={()=>{
+            history.push('/Worker/orders', {email:email, type:type})
+          }}>
+          <ListItemIcon>
+            <HistoryIcon />
+          </ListItemIcon>
+          <ListItemText primary={"ORDERS"} />
+        </ListItem>
 
-        <Link to="/worker/feedback" style={{ textDecoration: 'none', color: "black" }}>
-          <ListItem button>
-            <ListItemIcon>
-              <CommentIcon />
-            </ListItemIcon>
-            <ListItemText primary={"FEEDBACK"} />
-          </ListItem>
-        </Link>
+        <ListItem button onClick={()=>{
+            history.push('/Worker/feedback', {email:email, type:type})
+          }}>
+          <ListItemIcon>
+            <CommentIcon />
+          </ListItemIcon>
+          <ListItemText primary={"FEEDBACK"} />
+        </ListItem>
 
-        <Link to="/worker/profileinfo" style={{ textDecoration: 'none', color: "black" }}>
-          <ListItem button>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText primary={"PROFILE INFO"} />
-          </ListItem>
-        </Link>
+        <ListItem button onClick={()=>{
+            history.push('/Worker/profileinfo', {email:email, type:type})
+          }}>
+          <ListItemIcon>
+            <PersonIcon />
+          </ListItemIcon>
+          <ListItemText primary={"PROFILE INFO"} />
+        </ListItem>
       </List>
 
     </Drawer>

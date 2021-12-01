@@ -3,7 +3,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Paper from '@mui/material/Paper';
 import Container from '@mui/material/Container';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -46,7 +45,6 @@ icon: {
 }));
   
 export default function LoginPage() {
-  const paperStyle = { padding: '50px 20px', width: 600, margin: "20px auto" }
   const [type, setType] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
@@ -110,6 +108,7 @@ export default function LoginPage() {
   }
   const onLoginSuccess = (res) => {
     setType('User');
+    setEmail(res.profileObj.email);
 
     const here = { email: res.profileObj.email };
     console.log(here);
@@ -133,7 +132,9 @@ export default function LoginPage() {
 
   React.useEffect(() => {
     if (authenticated == 0) {
-      history.push('/' + type);
+      const em = email;
+      console.log(em);
+      history.push('/' + type, { email: email, type: type });
     }
   }, [authenticated]);
 
