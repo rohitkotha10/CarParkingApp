@@ -10,16 +10,32 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MyOrdersRepository extends JpaRepository<MyOrders, Integer> {
 
-    public MyOrders findBySlotTime(String slotTime);
+        public List<MyOrders> findAllByMyOrderdate(String myOrderdate);
 
-    public List<MyOrders> findByWorkerEmail(String workerEmail);
+        public List<MyOrders> findByWorkerEmail(String workerEmail);
 
-    public List<MyOrders> findByUserEmail(String userEmail);
+        public List<MyOrders> findByUserEmail(String userEmail);
 
-    public List<MyOrders> findByParkingSlotLocation(String parkingSlotLocation);
+        public List<MyOrders> findByParkingSlotLocation(String parkingSlotLocation);
 
-    public boolean existsBySlotTime(String slotTime);
+        public MyOrders findByUserEmailAndParkingSlotLocationAndMyOrderdate(
+                        String userEmail,
+                        String parkingSlotLocation,
+                        String myOrderdate);
 
-    public int removeBySlotTime(String slotTime);
+        public List<MyOrders> findByMyOrderdateAndMyCheckinAndMyCheckout(
+                        String myOrderdate,
+                        String myCheckin,
+                        String myCheckout);
+
+        public boolean existsByUserEmailAndParkingSlotLocationAndMyOrderdate(
+                        String userEmail,
+                        String parkingSlotLocation,
+                        String myOrderdate);
+
+        public int deleteByUserEmailAndParkingSlotLocationAndMyOrderdate(
+                        String userEmail,
+                        String parkingSlotLocation,
+                        String myOrderdate);
 
 }

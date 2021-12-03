@@ -12,5 +12,5 @@ public interface ParkingRepository extends JpaRepository<ParkingSlot, Integer> {
 
     public boolean existsByLocation(String location);
 
-    public int removeByLocation(String location);
+    public int deleteByLocation(String location);
 }

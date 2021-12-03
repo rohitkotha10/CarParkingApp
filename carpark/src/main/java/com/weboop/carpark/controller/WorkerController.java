@@ -2,6 +2,8 @@ package com.weboop.carpark.controller;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import com.weboop.carpark.model.MyOrders;
 import com.weboop.carpark.model.Worker;
 import com.weboop.carpark.service.MyOrdersService;
@@ -48,11 +50,12 @@ public class WorkerController {
     }
 
     @PostMapping("/removeworker")
+    @Transactional
     public int removeWorker(@RequestBody Worker details) {
         try {
             if (!workerService.existsByEmail(details.getEmail()))
                 return 1;// not exists
-            workerService.removeByEmail(details.getEmail());
+            workerService.deleteByEmail(details.getEmail());
             return 0;
         } catch (Exception e) {
             return 9;
@@ -72,25 +75,6 @@ public class WorkerController {
             return myOrdersService.findByWorkerEmail(details.getEmail());
         } catch (Exception e) {
             return null;
-        }
-    }
-
-    @PostMapping("/getrating")
-    public int getRating(@RequestBody Worker details) {
-        try {
-            if (!workerService.existsByEmail(details.getEmail()))
-                return -1;// not exists
-            List<MyOrders> related = myOrdersService.findByWorkerEmail(details.getEmail());
-            if (related.size() == 0)
-                return 0;
-
-            int sum = 0;
-            for (int i = 0; i < related.size(); i++)
-                sum += (related.get(i)).getRating();
-            return (sum / related.size());
-
-        } catch (Exception e) {
-            return 9;
         }
     }
 

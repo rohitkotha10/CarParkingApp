@@ -12,5 +12,5 @@ public interface WaitingRegRepository extends JpaRepository<UserNonReg, Integer>
 
     public boolean existsByEmail(String email);
 
-    public int removeByEmail(String email);
+    public int deleteByEmail(String email);
 }

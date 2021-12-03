@@ -28,4 +28,16 @@ public class AdminController {
             return new Admin();
         }
     }
+
+    @PostMapping("/addadmin")
+    public int addWorker(@RequestBody Admin details) {
+        try {
+            if (adminService.existsByEmail(details.getEmail()))
+                return 1;// already exists
+            adminService.saveAdmin(details);
+            return 0;
+        } catch (Exception e) {
+            return 9;
+        }
+    }
 }

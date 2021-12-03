@@ -12,5 +12,5 @@ public interface WorkerRepository extends JpaRepository<Worker, Integer> {
 
     boolean existsByEmail(String email);
 
-    public int removeByEmail(String email);
+    public int deleteByEmail(String email);
 }

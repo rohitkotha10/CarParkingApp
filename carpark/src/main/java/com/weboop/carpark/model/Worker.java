@@ -15,11 +15,29 @@ public class Worker {
 
     private String name;
     private String email;
-    private int workExperience; // in hours
+    private int workExperience = 0; // in hours
     private String password;
+    private float rating = 3;
+    private int count = 0;
 
     public int getId() {
         return id;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public void setId(int id) {

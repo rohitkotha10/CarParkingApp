@@ -2,6 +2,8 @@ package com.weboop.carpark.controller;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import com.weboop.carpark.model.MyOrders;
 import com.weboop.carpark.model.ParkingSlot;
 import com.weboop.carpark.service.MyOrdersService;
@@ -48,11 +50,12 @@ public class ParkingController {
     }
 
     @PostMapping("/removeparking")
+    @Transactional
     public int removeParking(@RequestBody ParkingSlot details) {
         try {
             if (!parkingService.existsByLocation(details.getLocation()))
                 return 1;// not exists
-            parkingService.removeByLocation(details.getLocation());
+            parkingService.deleteByLocation(details.getLocation());
             return 0;
         } catch (Exception e) {
             return 9;
@@ -71,25 +74,6 @@ public class ParkingController {
             return myOrdersService.findByParkingSlotLocation(details.getLocation());
         } catch (Exception e) {
             return null;
-        }
-    }
-
-    @PostMapping("/getrating")
-    public int getRating(@RequestBody ParkingSlot details) {
-        try {
-            if (!parkingService.existsByLocation(details.getLocation()))
-                return -1;// not exists
-            List<MyOrders> related = myOrdersService.findByParkingSlotLocation(details.getLocation());
-            if (related.size() == 0)
-                return 0;
-
-            int sum = 0;
-            for (int i = 0; i < related.size(); i++)
-                sum += (related.get(i)).getRating();
-            return (sum / related.size());
-
-        } catch (Exception e) {
-            return 9;
         }
     }
 }

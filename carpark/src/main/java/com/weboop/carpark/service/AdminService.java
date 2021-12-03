@@ -20,8 +20,8 @@ public class AdminService {
         return adminRepository.existsByEmail(email);
     }
 
-    public int removeByEmail(String email) {
-        return adminRepository.removeByEmail(email);
+    public int deleteByEmail(String email) {
+        return adminRepository.deleteByEmail(email);
     }
 
     public Admin saveAdmin(Admin admin) {

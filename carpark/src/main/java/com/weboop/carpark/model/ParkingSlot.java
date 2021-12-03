@@ -14,22 +14,31 @@ public class ParkingSlot {
     private int id;
 
     private String location;
-    private boolean Occupied;
+    private float rating = 3;
+    private int count = 0;
 
     public int getId() {
         return id;
     }
 
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     public void setId(int id) {
         this.id = id;
-    }
-
-    public boolean isOccupied() {
-        return Occupied;
-    }
-
-    public void setOccupied(boolean occupied) {
-        this.Occupied = occupied;
     }
 
     public String getLocation() {
