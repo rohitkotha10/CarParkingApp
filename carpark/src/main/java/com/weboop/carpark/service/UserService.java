@@ -22,8 +22,8 @@ public class UserService {
         return userRepository.existsByEmail(email);
     }
 
-    public int removeByEmail(String email) {
-        return userRepository.removeByEmail(email);
+    public int deleteByEmail(String email) {
+        return userRepository.deleteByEmail(email);
     }
 
     public User saveUser(User user) {
@@ -35,5 +35,5 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    //feedback form, payment confirmations
+    // feedback form, payment confirmations
 }

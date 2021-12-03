@@ -64,7 +64,7 @@ public class RegistrationController {
             welcomeUser.setPassword(cur.getPassword());
 
             userService.saveUser(welcomeUser);
-            userNonRegService.removeByEmail(cur.getEmail());
+            userNonRegService.deleteByEmail(cur.getEmail());
 
             return 0;// ok
         } catch (Exception e) {

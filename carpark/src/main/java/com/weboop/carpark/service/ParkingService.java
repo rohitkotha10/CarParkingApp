@@ -22,8 +22,8 @@ public class ParkingService {
         return parkingRepository.existsByLocation(location);
     }
 
-    public int removeByLocation(String location) {
-        return parkingRepository.removeByLocation(location);
+    public int deleteByLocation(String location) {
+        return parkingRepository.deleteByLocation(location);
     }
 
     public ParkingSlot saveParkingSlot(ParkingSlot parking) {

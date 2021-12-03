@@ -22,8 +22,8 @@ public class WorkerService {
         return workerRepository.existsByEmail(email);
     }
 
-    public int removeByEmail(String email) {
-        return workerRepository.removeByEmail(email);
+    public int deleteByEmail(String email) {
+        return workerRepository.deleteByEmail(email);
     }
 
     public Worker saveWorker(Worker worker) {

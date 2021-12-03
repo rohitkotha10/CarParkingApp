@@ -16,13 +16,14 @@ public class MyOrders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String date; // 6digit string format DD-MM-YY
-    private String slotTime;// 8digit string format HHMM-HHMM
+    private String myOrderdate;
+    private String myCheckin;
+    private String myCheckout;
+
     private int rating; // from 1 to 5
     private int totalPayment;
-    private boolean dryCleaning;
-    private boolean carWash;
-    private boolean airFill;
+    private boolean carWash = false;
+    private boolean airFill = false;
 
     @ElementCollection
     private List<String> comments = new ArrayList<String>();
@@ -33,6 +34,38 @@ public class MyOrders {
 
     public int getId() {
         return id;
+    }
+
+    public String getMyCheckout() {
+        return myCheckout;
+    }
+
+    public void setMyCheckout(String myCheckout) {
+        this.myCheckout = myCheckout;
+    }
+
+    public String getMyCheckin() {
+        return myCheckin;
+    }
+
+    public void setMyCheckin(String myCheckin) {
+        this.myCheckin = myCheckin;
+    }
+
+    public String getMyOrderdate() {
+        return myOrderdate;
+    }
+
+    public void setMyOrderdate(String myOrderdate) {
+        this.myOrderdate = myOrderdate;
+    }
+
+    public List<String> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<String> comments) {
+        this.comments = comments;
     }
 
     public String getParkingSlotLocation() {
@@ -63,24 +96,8 @@ public class MyOrders {
         this.id = id;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public boolean isAirFill() {
         return airFill;
-    }
-
-    public String getSlotTime() {
-        return slotTime;
-    }
-
-    public void setSlotTime(String slotTime) {
-        this.slotTime = slotTime;
     }
 
     public void setAirFill(boolean airFill) {
@@ -93,14 +110,6 @@ public class MyOrders {
 
     public void setCarWash(boolean carWash) {
         this.carWash = carWash;
-    }
-
-    public boolean isDryCleaning() {
-        return dryCleaning;
-    }
-
-    public void setDryCleaning(boolean dryCleaning) {
-        this.dryCleaning = dryCleaning;
     }
 
     public int getTotalPayment() {

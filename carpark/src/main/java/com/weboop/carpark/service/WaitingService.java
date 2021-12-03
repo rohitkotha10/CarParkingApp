@@ -17,5 +17,5 @@ public class WaitingService {
         return waitingRepository.save(user);
     }
 
-    //requests handling
+    // requests handling
 }

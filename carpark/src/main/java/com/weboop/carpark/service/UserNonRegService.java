@@ -45,7 +45,7 @@ public class UserNonRegService {
         return waitRegRepository.save(user);
     }
 
-    public int removeByEmail(String email) {
-        return waitRegRepository.removeByEmail(email);
+    public int deleteByEmail(String email) {
+        return waitRegRepository.deleteByEmail(email);
     }
 }

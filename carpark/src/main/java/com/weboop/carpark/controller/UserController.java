@@ -2,6 +2,8 @@ package com.weboop.carpark.controller;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import com.weboop.carpark.model.MyOrders;
 import com.weboop.carpark.model.User;
 import com.weboop.carpark.service.MyOrdersService;
@@ -35,6 +37,31 @@ public class UserController {
         }
     }
 
+    @PostMapping("/adduser")
+    public int addUser(@RequestBody User details) {
+        try {
+            if (userService.existsByEmail(details.getEmail()))
+                return 1;// already exists
+            userService.saveUser(details);
+            return 0;
+        } catch (Exception e) {
+            return 9;
+        }
+    }
+
+    @PostMapping("/removeuser")
+    @Transactional
+    public int removeUser(@RequestBody User details) {
+        try {
+            if (!userService.existsByEmail(details.getEmail()))
+                return 1;// not exists
+            userService.deleteByEmail(details.getEmail());
+            return 0;
+        } catch (Exception e) {
+            return 9;
+        }
+    }
+
     @GetMapping("/getallusers")
     public List<User> getAllOrders() {
         return userService.getAllUsers();
@@ -50,5 +77,4 @@ public class UserController {
             return null;
         }
     }
-    // payment, feedback email
 }
