@@ -27,14 +27,18 @@ public class MyOrdersService {
         return myOrdersRepository.findByParkingSlotLocation(parkingSlotLocation);
     }
 
-    public MyOrders findByUserEmailAndParkingSlotLocationAndMyOrderdate(
+    public MyOrders findByUserEmailAndParkingSlotLocationAndMyOrderdateAndMyCheckinAndMyCheckout(
             String userEmail,
             String parkingSlotLocation,
-            String myOrderdate) {
-        return myOrdersRepository.findByUserEmailAndParkingSlotLocationAndMyOrderdate(
+            String myOrderdate,
+            String myCheckin,
+            String myCheckout) {
+        return myOrdersRepository.findByUserEmailAndParkingSlotLocationAndMyOrderdateAndMyCheckinAndMyCheckout(
                 userEmail,
                 parkingSlotLocation,
-                myOrderdate);
+                myOrderdate,
+                myCheckin,
+                myCheckout);
     }
 
     public String sendEmail(String userEmail, int payment) {
@@ -50,24 +54,32 @@ public class MyOrdersService {
         return userEmail;
     }
 
-    public int deleteByUserEmailAndParkingSlotLocationAndMyOrderdate(
+    public int deleteByUserEmailAndParkingSlotLocationAndMyOrderdateAndMyCheckinAndMyCheckout(
             String userEmail,
             String parkingSlotLocation,
-            String myOrderdate) {
-        return myOrdersRepository.deleteByUserEmailAndParkingSlotLocationAndMyOrderdate(
+            String myOrderdate,
+            String myCheckin,
+            String myCheckout) {
+        return myOrdersRepository.deleteByUserEmailAndParkingSlotLocationAndMyOrderdateAndMyCheckinAndMyCheckout(
                 userEmail,
                 parkingSlotLocation,
-                myOrderdate);
+                myOrderdate,
+                myCheckin,
+                myCheckout);
     }
 
-    public boolean existsByUserEmailAndParkingSlotLocationAndMyOrderdate(
+    public boolean existsByUserEmailAndParkingSlotLocationAndMyOrderdateAndMyCheckinAndMyCheckout(
             String userEmail,
             String parkingSlotLocation,
-            String myOrderdate) {
-        return myOrdersRepository.existsByUserEmailAndParkingSlotLocationAndMyOrderdate(
+            String myOrderdate,
+            String myCheckin,
+            String myCheckout) {
+        return myOrdersRepository.existsByUserEmailAndParkingSlotLocationAndMyOrderdateAndMyCheckinAndMyCheckout(
                 userEmail,
                 parkingSlotLocation,
-                myOrderdate);
+                myOrderdate,
+                myCheckin,
+                myCheckout);
     }
 
     public List<MyOrders> findByWorkerEmail(String workerEmail) {

@@ -1,10 +1,9 @@
 import React from 'react'
 
-import UserDrawer from '../user/UserDrawer'
-import Dash from '../user/Dash'
-import Booking from '../user/Booking'
-import PreviousOrders from '../user/PreviousOrders'
-import ProfileInfo from '../user/ProfileInfo'
+import UserDrawer from './UserDrawer'
+import Booking from './Booking'
+import Orders from './Orders'
+import ProfileInfo from './ProfileInfo'
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { useLocation } from "react-router-dom";
@@ -25,15 +24,15 @@ export default function UserDash() {
       <Switch>
 
         <Route exact path="/User/">
-          <Dash />
+          <Orders />
         </Route>
 
         <Route exact path="/User/profileinfo">
           <ProfileInfo />
         </Route>
 
-        <Route exact path="/User/previousorders">
-          <PreviousOrders />
+        <Route exact path="/User/orders">
+          <Orders />
         </Route>
 
         <Route exact path="/User/booking">

@@ -36,13 +36,15 @@ public class MyOrdersController {
     @PostMapping("/getinfo")
     public MyOrders getInfo(@RequestBody MyOrders details) {
         try {
-            MyOrders cur = myOrdersService.findByUserEmailAndParkingSlotLocationAndMyOrderdate(
+            MyOrders cur = myOrdersService.findByUserEmailAndParkingSlotLocationAndMyOrderdateAndMyCheckinAndMyCheckout(
                     details.getUserEmail(),
                     details.getParkingSlotLocation(),
-                    details.getMyOrderdate());
+                    details.getMyOrderdate(),
+                    details.getMyCheckin(),
+                    details.getMyCheckout());
             return cur;
         } catch (Exception e) {
-            return new MyOrders();
+            return null;
         }
     }
 
@@ -132,10 +134,12 @@ public class MyOrdersController {
     @Transactional
     public String commentAdd(@RequestBody MyOrders details) {
         try {
-            MyOrders cur = myOrdersService.findByUserEmailAndParkingSlotLocationAndMyOrderdate(
+            MyOrders cur = myOrdersService.findByUserEmailAndParkingSlotLocationAndMyOrderdateAndMyCheckinAndMyCheckout(
                     details.getUserEmail(),
                     details.getParkingSlotLocation(),
-                    details.getMyOrderdate());
+                    details.getMyOrderdate(),
+                    details.getMyCheckin(),
+                    details.getMyCheckout());
 
             List<String> addthis = cur.getComments();
             addthis.add(details.getComments().get(0));
@@ -176,10 +180,12 @@ public class MyOrdersController {
     @Transactional
     public int remove(@RequestBody MyOrders details) {
         try {
-            myOrdersService.deleteByUserEmailAndParkingSlotLocationAndMyOrderdate(
+            myOrdersService.deleteByUserEmailAndParkingSlotLocationAndMyOrderdateAndMyCheckinAndMyCheckout(
                     details.getUserEmail(),
                     details.getParkingSlotLocation(),
-                    details.getMyOrderdate());
+                    details.getMyOrderdate(),
+                    details.getMyCheckin(),
+                    details.getMyCheckout());
             return 0;
         } catch (Exception e) {
             return 9;
@@ -191,10 +197,12 @@ public class MyOrdersController {
     public String payment(@RequestBody MyOrders details) {
         try {
 
-            MyOrders cur = myOrdersService.findByUserEmailAndParkingSlotLocationAndMyOrderdate(
+            MyOrders cur = myOrdersService.findByUserEmailAndParkingSlotLocationAndMyOrderdateAndMyCheckinAndMyCheckout(
                     details.getUserEmail(),
                     details.getParkingSlotLocation(),
-                    details.getMyOrderdate());
+                    details.getMyOrderdate(),
+                    details.getMyCheckin(),
+                    details.getMyCheckout());
 
             String stri = cur.getMyCheckin();
             String stro = cur.getMyCheckout();

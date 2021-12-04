@@ -1,10 +1,8 @@
 import React from 'react'
 
-import WorkerDrawer from '../worker/WorkerDrawer';
-import Dash from '../worker/Dash';
-import ProfileInfo from '../worker/ProfileInfo';
-import Feedback from '../worker/Feedback';
-import Orders from '../worker/Orders';
+import WorkerDrawer from './WorkerDrawer';
+import ProfileInfo from './ProfileInfo';
+import Orders from './Orders';
 
 import { BrowserRouter as Router, Switch, Route, Link  } from "react-router-dom"
 import { useLocation } from "react-router-dom";
@@ -25,7 +23,7 @@ export default function WorkerDash() {
       <Switch>
 
         <Route exact path="/Worker/">
-          <Dash />
+          <Orders />
         </Route>
 
         <Route exact path="/Worker/profileinfo">
@@ -34,10 +32,6 @@ export default function WorkerDash() {
 
         <Route exact path="/Worker/orders">
           <Orders />
-        </Route>
-
-        <Route exact path="/Worker/feedback">
-          <Feedback />
         </Route>
 
       </Switch>

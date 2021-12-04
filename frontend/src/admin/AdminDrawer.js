@@ -1,7 +1,6 @@
 import React from 'react'
 import { Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 
-import HomeIcon from "@mui/icons-material/Home"
 import PersonIcon from '@mui/icons-material/Person';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import HistoryIcon from '@mui/icons-material/History';
@@ -24,23 +23,6 @@ export default function AdminDrawer() {
       open={true}>
 
       <List>
-        <ListItem button onClick={() => {
-          history.push('/Admin/', { email: email, type: type })
-        }}>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText primary={"DASHBOARD"} />
-        </ListItem>
-
-        <ListItem button onClick={() => {
-          history.push('/Admin/parkingspots', { email: email, type: type })
-        }}>
-          <ListItemIcon>
-            <DirectionsCarIcon />
-          </ListItemIcon>
-          <ListItemText primary={"PARKING SPOTS"} />
-        </ListItem>
 
         <ListItem button onClick={() => {
           history.push('/Admin/orders', { email: email, type: type })
@@ -52,12 +34,22 @@ export default function AdminDrawer() {
         </ListItem>
 
         <ListItem button onClick={() => {
+          history.push('/Admin/parkingspots', { email: email, type: type })
+        }}>
+          <ListItemIcon>
+            <DirectionsCarIcon />
+          </ListItemIcon>
+          <ListItemText primary={"PARKING SPOTS"} />
+        </ListItem>
+
+
+        <ListItem button onClick={() => {
           history.push('/Admin/allusers', { email: email, type: type })
         }}>
           <ListItemIcon>
             <PersonIcon />
           </ListItemIcon>
-          <ListItemText primary={"ALL USERS"} />
+          <ListItemText primary={"USERS"} />
         </ListItem>
 
         <ListItem button onClick={() => {
@@ -66,7 +58,7 @@ export default function AdminDrawer() {
           <ListItemIcon>
             <PersonIcon />
           </ListItemIcon>
-          <ListItemText primary={"ALL WORKERS"} />
+          <ListItemText primary={"WORKERS"} />
         </ListItem>
       </List>
 

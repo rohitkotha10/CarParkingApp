@@ -21,11 +21,11 @@ public class AdminController {
     public Admin getInfo(@RequestBody Admin details) {
         try {
             if (!adminService.existsByEmail(details.getEmail()))
-                return new Admin();// already exists
+                return null;// already exists
             Admin cur = adminService.findByEmail(details.getEmail());
             return cur;
         } catch (Exception e) {
-            return new Admin();
+            return null;
         }
     }
 

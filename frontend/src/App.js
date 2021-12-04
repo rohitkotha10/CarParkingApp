@@ -3,12 +3,12 @@ import './App.css';
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 
-import LoginPage from './common/LoginPage'
-import AdminDash from './common/AdminDash'
-import UserDash from './common/UserDash'
-import WorkerDash from './common/WorkerDash';
-import RegisterPage from './common/RegisterPage';
-import VerificationPage from './common/VerificationPage';
+import LoginPage from './auth/LoginPage'
+import RegisterPage from './auth/RegisterPage';
+import VerificationPage from './auth/VerificationPage';
+import AdminDash from './admin/AdminDash'
+import UserDash from './user/UserDash'
+import WorkerDash from './worker/WorkerDash';
 
 export default function App() {
   return (

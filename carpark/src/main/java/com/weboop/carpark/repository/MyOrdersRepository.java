@@ -18,24 +18,30 @@ public interface MyOrdersRepository extends JpaRepository<MyOrders, Integer> {
 
         public List<MyOrders> findByParkingSlotLocation(String parkingSlotLocation);
 
-        public MyOrders findByUserEmailAndParkingSlotLocationAndMyOrderdate(
+        public MyOrders findByUserEmailAndParkingSlotLocationAndMyOrderdateAndMyCheckinAndMyCheckout(
                         String userEmail,
                         String parkingSlotLocation,
-                        String myOrderdate);
+                        String myOrderdate,
+                        String myCheckin,
+                        String myCheckout);
+
+        public boolean existsByUserEmailAndParkingSlotLocationAndMyOrderdateAndMyCheckinAndMyCheckout(
+                        String userEmail,
+                        String parkingSlotLocation,
+                        String myOrderdate,
+                        String myCheckin,
+                        String myCheckout);
+
+        public int deleteByUserEmailAndParkingSlotLocationAndMyOrderdateAndMyCheckinAndMyCheckout(
+                        String userEmail,
+                        String parkingSlotLocation,
+                        String myOrderdate,
+                        String myCheckin,
+                        String myCheckout);
 
         public List<MyOrders> findByMyOrderdateAndMyCheckinAndMyCheckout(
                         String myOrderdate,
                         String myCheckin,
                         String myCheckout);
-
-        public boolean existsByUserEmailAndParkingSlotLocationAndMyOrderdate(
-                        String userEmail,
-                        String parkingSlotLocation,
-                        String myOrderdate);
-
-        public int deleteByUserEmailAndParkingSlotLocationAndMyOrderdate(
-                        String userEmail,
-                        String parkingSlotLocation,
-                        String myOrderdate);
 
 }

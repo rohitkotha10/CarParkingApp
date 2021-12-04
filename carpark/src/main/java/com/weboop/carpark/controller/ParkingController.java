@@ -33,7 +33,7 @@ public class ParkingController {
             ParkingSlot cur = parkingService.findByLocation(details.getLocation());
             return cur;
         } catch (Exception e) {
-            return new ParkingSlot();
+            return null;
         }
     }
 

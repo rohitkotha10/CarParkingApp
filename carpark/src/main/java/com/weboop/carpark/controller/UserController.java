@@ -33,7 +33,7 @@ public class UserController {
             User cur = userService.findByEmail(details.getEmail());
             return cur;
         } catch (Exception e) {
-            return new User();
+            return null;
         }
     }
 

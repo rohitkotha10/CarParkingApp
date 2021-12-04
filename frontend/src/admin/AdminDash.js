@@ -1,11 +1,10 @@
 import React from 'react'
 
-import AdminDrawer from '../admin/AdminDrawer';
-import Dash from '../admin/Dash';
-import AllUsers from '../admin/AllUsers'
-import AllWorkers from '../admin/AllWorkers'
-import Orders from '../admin/Orders'
-import ParkingSpots from '../admin/ParkingSpots'
+import AdminDrawer from './AdminDrawer';
+import AllUsers from './AllUsers'
+import AllWorkers from './AllWorkers'
+import Orders from './Orders'
+import ParkingSpots from './ParkingSpots'
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { useLocation } from "react-router-dom";
@@ -26,7 +25,7 @@ export default function AdminDash() {
       <Switch>
 
         <Route exact path="/Admin/">
-          <Dash />
+          <Orders />
         </Route>
 
         <Route exact path="/Admin/allworkers">

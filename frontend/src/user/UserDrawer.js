@@ -24,14 +24,6 @@ export default function UserDrawer() {
       open={true}>
 
       <List>
-          <ListItem button onClick={()=>{
-            history.push('/User/', {email:email, type:type})
-          }}>
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary={"DASHBOARD"} />
-          </ListItem>
 
           <ListItem button onClick={()=>{
             history.push('/User/booking', {email:email, type:type})
@@ -43,12 +35,12 @@ export default function UserDrawer() {
           </ListItem>
 
           <ListItem button onClick={()=>{
-            history.push('/User/previousorders', {email:email, type:type})
+            history.push('/User/orders', {email:email, type:type})
           }}>
             <ListItemIcon>
               <HistoryIcon />
             </ListItemIcon>
-            <ListItemText primary={"PREVIOUS ORDERS"} />
+            <ListItemText primary={"ORDERS"} />
           </ListItem>
 
           <ListItem button onClick={()=>{

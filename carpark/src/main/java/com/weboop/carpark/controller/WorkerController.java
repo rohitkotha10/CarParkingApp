@@ -33,7 +33,7 @@ public class WorkerController {
             Worker cur = workerService.findByEmail(details.getEmail());
             return cur;
         } catch (Exception e) {
-            return new Worker();
+            return null;
         }
     }
 
