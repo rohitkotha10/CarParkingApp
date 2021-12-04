@@ -1,45 +1,17 @@
-import './App.css';
-
-import React from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
-
-import LoginPage from './auth/LoginPage'
-import RegisterPage from './auth/RegisterPage';
-import VerificationPage from './auth/VerificationPage';
-import AdminDash from './admin/AdminDash'
-import UserDash from './user/UserDash'
-import WorkerDash from './worker/WorkerDash';
+import './App.css'
+import { useRoutes } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline'
+import { theme } from './theme';
+import { routes } from './routes';
 
 export default function App() {
+  const content = useRoutes(routes);
+
   return (
-    <Router>
-      <div>
-        <Switch>
-          <Route exact path="/">
-            <LoginPage />
-          </Route>
-
-          <Route exact path="/register">
-            <RegisterPage />
-          </Route>
-
-          <Route exact path="/verify">
-            <VerificationPage />
-          </Route>
-
-          <Route exact path="/admin">
-            <AdminDash />
-          </Route>
-
-          <Route exact path="/user">
-            <UserDash />
-          </Route>
-
-          <Route exact path="/worker">
-            <WorkerDash />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {content}
+    </ThemeProvider>
   );
 }

@@ -3,28 +3,28 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { useHistory } from "react-router-dom";
-import { createTheme, ThemeProvider} from '@mui/material/styles';
+import { useNavigate } from "react-router-dom";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   select: {
     '&:before': {
-        borderColor: 'white',
-        background: "#373b3d",
+      borderColor: 'white',
+      background: "#373b3d",
     },
     '&:after': {
-        borderColor: 'white',
-        background: "#373b3d",
+      borderColor: 'white',
+      background: "#373b3d",
     },
     '&:not(.Mui-disabled):hover::before': {
-        borderColor: 'white',
-        background: "#373b3d",
+      borderColor: 'white',
+      background: "#373b3d",
     },
-},
-icon: {
+  },
+  icon: {
     fill: 'white',
-},
+  },
   root: {
     "& .MuiFilledInput-root": {
       background: "#373b3d"
@@ -46,15 +46,16 @@ export default function RegisterPage() {
   const [passwordc, setPasswordc] = React.useState('')
   const [authenticated, setAuth] = React.useState(5)
 
-  let history = useHistory();
+  let navigate = useNavigate();
 
   const styletheme = createTheme({
     typography: {
-      
+
       fontFamily: [
         'Chilanka',
         'cursive',
-      ].join(','),},
+      ].join(','),
+    },
     palette: {
       primary: {
         light: '#757ce8',
@@ -63,7 +64,7 @@ export default function RegisterPage() {
         contrastText: '#fff',
       },
       secondary: {
-        
+
         dark: '#1d1f20',
         main: '#303641',
         background: '#373b3d',
@@ -73,7 +74,7 @@ export default function RegisterPage() {
         main: '#ffffff',
       },
     },
-    
+
   })
   const classes = useStyles();
 
@@ -110,109 +111,109 @@ export default function RegisterPage() {
 
   React.useEffect(() => {
     if (authenticated == 0) {
-      history.push('/verify');
+      navigate('/verify');
     }
   }, [authenticated]);
 
   return (
     <div>
-    <ThemeProvider theme={styletheme}>
-    <Box 
-    sx={{
-      width: 1536,
-      height: 593,
-      backgroundColor: 'secondary.main',
-    }} pt={20}>
+      <ThemeProvider theme={styletheme}>
+        <Box
+          sx={{
+            width: 1536,
+            height: 593,
+            backgroundColor: 'secondary.main',
+          }} pt={20}>
 
 
-    <Box sx={{ justifyContent: 'center' }}>
+          <Box sx={{ justifyContent: 'center' }}>
 
-      <div>
-        
-      <Box sx={{backgroundColor: 'secondary.dark', width: 580, height: 462, borderRadius: 3, boxShadow: 20}} ml={50} >
-        
-          <Box>
-          <Typography fontSize={42} fontWeight={400} gutterBottom color='secondary.contrastText'>
-              Registration Form
-            </Typography>
-          </Box>
+            <div>
 
-          {!(authenticated == 0 || authenticated == 5) && (
-            <Typography color="#eb6359">
-              Something Wrong! Please Try Again.
-            </Typography>
-          )}
+              <Box sx={{ backgroundColor: 'secondary.dark', width: 580, height: 462, borderRadius: 3, boxShadow: 20 }} ml={50} >
 
-          <Box
-            component="form"
-            sx={{
-              '& > :not(style)': { m: 1, width: '25ch' },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <TextField id="outlined-basic" label="First Name"  variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
+                <Box>
+                  <Typography fontSize={42} fontWeight={400} gutterBottom color='secondary.contrastText'>
+                    Registration Form
+                  </Typography>
+                </Box>
 
-            <TextField id="outlined-basic" label="Last Name" variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
+                {!(authenticated == 0 || authenticated == 5) && (
+                  <Typography color="#eb6359">
+                    Something Wrong! Please Try Again.
+                  </Typography>
+                )}
 
-            <TextField id="outlined-basic" label="Address" variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
+                <Box
+                  component="form"
+                  sx={{
+                    '& > :not(style)': { m: 1, width: '25ch' },
+                  }}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <TextField id="outlined-basic" label="First Name" variant="filled" className={classes.root} color="neutral" InputProps={{ style: { color: "white" } }}
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
 
-            <TextField id="outlined-basic" label="Mobile No." variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
-              value={mobileNumber}
-              onChange={(e) => setMobileNumber(e.target.value)}
-            />
+                  <TextField id="outlined-basic" label="Last Name" variant="filled" className={classes.root} color="neutral" InputProps={{ style: { color: "white" } }}
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
 
-            <TextField id="outlined-basic" label="Car Number" variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
-              value={carNumber}
-              onChange={(e) => setCarNumber(e.target.value)}
-            />
+                  <TextField id="outlined-basic" label="Address" variant="filled" className={classes.root} color="neutral" InputProps={{ style: { color: "white" } }}
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                  />
 
-            <TextField id="outlined-basic" label="Email" variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+                  <TextField id="outlined-basic" label="Mobile No." variant="filled" className={classes.root} color="neutral" InputProps={{ style: { color: "white" } }}
+                    value={mobileNumber}
+                    onChange={(e) => setMobileNumber(e.target.value)}
+                  />
 
-            <TextField id="outlined-password-input" label="Password" type="password" variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)} />
+                  <TextField id="outlined-basic" label="Car Number" variant="filled" className={classes.root} color="neutral" InputProps={{ style: { color: "white" } }}
+                    value={carNumber}
+                    onChange={(e) => setCarNumber(e.target.value)}
+                  />
 
-            <TextField id="outlined-password-input" label="Confirm Password" type="password" variant="filled" className={classes.root} color="neutral" InputProps={{ style: {color: "white"} }}
-              value={passwordc}
-              onChange={(e) => setPasswordc(e.target.value)} />
+                  <TextField id="outlined-basic" label="Email" variant="filled" className={classes.root} color="neutral" InputProps={{ style: { color: "white" } }}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
 
-            {!(password == passwordc) && (
-              <Typography color="#eb6359">
-                Password does not Match!.
-              </Typography>
-            )}
+                  <TextField id="outlined-password-input" label="Password" type="password" variant="filled" className={classes.root} color="neutral" InputProps={{ style: { color: "white" } }}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)} />
 
-          </Box>
-          <Box
-            sx={{
-              '& > :not(style)': { m: 2, width: '12ch' },
-            }}>
-            <Button variant="contained" onClick={handleClick} color="secondary">
-              register
-            </Button>
+                  <TextField id="outlined-password-input" label="Confirm Password" type="password" variant="filled" className={classes.root} color="neutral" InputProps={{ style: { color: "white" } }}
+                    value={passwordc}
+                    onChange={(e) => setPasswordc(e.target.value)} />
+
+                  {!(password == passwordc) && (
+                    <Typography color="#eb6359">
+                      Password does not Match!.
+                    </Typography>
+                  )}
+
+                </Box>
+                <Box
+                  sx={{
+                    '& > :not(style)': { m: 2, width: '12ch' },
+                  }}>
+                  <Button variant="contained" onClick={handleClick} color="secondary">
+                    register
+                  </Button>
+                </Box>
+
+              </Box>
+            </div>
           </Box>
 
         </Box>
-      </div>
-    </Box>
-    
-    </Box>
-    </ThemeProvider>
+      </ThemeProvider>
     </div>
-  ); 
+  );
 }
 
 

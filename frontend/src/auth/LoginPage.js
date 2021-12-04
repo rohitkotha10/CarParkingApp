@@ -10,7 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import GoogleLogin from 'react-google-login'
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { makeStyles } from "@mui/styles";
 
@@ -36,7 +36,7 @@ export default function LoginPage() {
   const [password, setPassword] = React.useState('')
   const [authenticated, setAuth] = React.useState(5)
 
-  let history = useHistory();
+  let navigate = useNavigate();
 
   const styletheme = createTheme({
     typography: {
@@ -121,7 +121,7 @@ export default function LoginPage() {
     if (authenticated == 0) {
       const em = email;
       console.log(em);
-      history.push('/' + type, { email: email, type: type });
+      navigate(type, { state: { email: email, type: type } });
     }
   }, [authenticated]);
 
