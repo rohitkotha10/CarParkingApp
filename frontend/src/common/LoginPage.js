@@ -139,7 +139,7 @@ export default function LoginPage() {
             <div>
 
               <Box sx={{ backgroundColor: 'secondary.dark', width: 375, height: 470, borderRadius: 3, boxShadow: 20 }} ml={50} >
-                <Box >
+                <Box pt={2}>
                   <Typography fontSize={42} fontWeight={400} gutterBottom color='secondary.contrastText'>
                     Login
                   </Typography>
@@ -217,8 +217,6 @@ export default function LoginPage() {
                   </Button>
                 </Link>
               </Box>
-
-
             </div>
           </Container >
         </Box>
