@@ -7,7 +7,7 @@ import { AddBut } from '../components/booking-dialog';
 import {
   Avatar,
   Box,
-  Button,
+  Stack,
   Card,
   Container,
   Grid,
@@ -15,6 +15,11 @@ import {
   TextField,
   Typography
 } from '@mui/material';
+
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
+import TimePicker from '@mui/lab/TimePicker';
 
 const companySizeOptions = ['1-10', '11-30', '31-50', '50+'];
 
@@ -26,14 +31,14 @@ export default function Booking() {
   const type = location.state.type;
 
   const Checkins = ['00:00', '00:30']
-  const Durations = ['1hr', '2hr', '3hr', '4hr', '5hr']
+  const Durations = [1, 2, 3, 4, 5]
   const Dates = ['2021-12-05', '2021-12-03']
 
   const [parks, setParks] = useState([]);
   const [works, setWorks] = useState([]);
   const [myOrderdate, setDate] = useState('');
   const [myCheckin, setCheckin] = useState('');
-  const [myCheckout, setCheckout] = useState('');
+  const [duration, setDuration] = useState('');
   const carWashs = ['YES', 'NO']
   const airFills = ['YES', 'NO']
 
@@ -99,50 +104,40 @@ export default function Booking() {
                   spacing={2}
                   sx={{ maxWidth: 420 }}
                 >
-                  <Grid
-                    item
-                    xs={12}
-                  >
-                    <TextField
-                      fullWidth
-                      label="Date"
-                      variant="outlined"
-                      select
-                      variant="outlined"
-                      onChange={(e) => setDate(e.target.value)}
-                    >
-                      {Dates.map((date) => (
-                        <MenuItem
-                          key={date}
-                          value={date}
-                        >
-                          {date}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                  </Grid>
 
                   <Grid
                     item
                     xs={12}
                   >
-                    <TextField
-                      fullWidth
-                      label="Check In"
-                      variant="outlined"
-                      select
-                      variant="outlined"
-                      onChange={(e) => setCheckin(e.target.value)}
-                    >
-                      {Checkins.map((checkin) => (
-                        <MenuItem
-                          key={checkin}
-                          value={checkin}
-                        >
-                          {checkin}
-                        </MenuItem>
-                      ))}
-                    </TextField>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <Stack spacing={3}>
+                        <DatePicker
+                          label="Date"
+                          value={myOrderdate}
+                          onChange={(newValue) => {
+                            setDate(newValue);
+                          }}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </Stack>
+                    </LocalizationProvider>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                  >
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <TimePicker
+                        label="Basic example"
+                        value={myCheckin}
+                        minTime={new Date(0, 0, 0, 5, 0)}
+                        maxTime={new Date(0, 0, 0, 18, 30)}
+                        onChange={(newValue) => {
+                          setCheckin(newValue);
+                        }}
+                        renderInput={(params) => <TextField {...params} />}
+                      />
+                    </LocalizationProvider>
                   </Grid>
 
                   <Grid
@@ -155,7 +150,7 @@ export default function Booking() {
                       variant="outlined"
                       select
                       variant="outlined"
-                      onChange={(e) => setCheckout(e.target.value)}
+                      onChange={(e) => setDuration(e.target.value)}
                     >
                       {Durations.map((hrs) => (
                         <MenuItem
@@ -172,7 +167,7 @@ export default function Booking() {
                     item
                     xs={12}
                   >
-                    <AddBut checkin={myCheckin} checkout={myCheckout} date={myOrderdate} />
+                    <AddBut checkin={myCheckin} incre={duration} date={myOrderdate} />
                   </Grid>
                 </Grid>
               </div>

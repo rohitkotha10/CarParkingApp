@@ -158,14 +158,9 @@ public class MyOrdersController {
 
     @PostMapping("/addcomment")
     @Transactional
-    public String commentAdd(@RequestBody MyOrders details) {
+    public int commentAdd(@RequestBody MyOrders details) {
         try {
-            MyOrders cur = myOrdersService.findByUserEmailAndParkingSlotLocationAndMyOrderdateAndMyCheckinAndMyCheckout(
-                    details.getUserEmail(),
-                    details.getParkingSlotLocation(),
-                    details.getMyOrderdate(),
-                    details.getMyCheckin(),
-                    details.getMyCheckout());
+            MyOrders cur = myOrdersService.findById(details.getId());
 
             cur.setComment(details.getComment());
             cur.setRating(details.getRating());
@@ -193,9 +188,9 @@ public class MyOrdersController {
             ratp /= par.getCount();
             par.setRating(ratp);
 
-            return "0";
+            return 0;
         } catch (Exception e) {
-            return e.toString();
+            return 9;
         }
     }
 
@@ -217,15 +212,12 @@ public class MyOrdersController {
 
     @PostMapping("/getpayment")
     @Transactional
-    public String payment(@RequestBody MyOrders details) {
+    public int payment(@RequestBody MyOrders details) {
         try {
 
-            MyOrders cur = myOrdersService.findByUserEmailAndParkingSlotLocationAndMyOrderdateAndMyCheckinAndMyCheckout(
-                    details.getUserEmail(),
-                    details.getParkingSlotLocation(),
-                    details.getMyOrderdate(),
-                    details.getMyCheckin(),
-                    details.getMyCheckout());
+            MyOrders cur = myOrdersService.findById(details.getId());
+            if (cur.getTotalPayment() > 0)
+                return 2;
 
             String stri = cur.getMyCheckin();
             String stro = cur.getMyCheckout();
@@ -257,11 +249,11 @@ public class MyOrdersController {
             Worker wor = workerService.findByEmail(cur.getWorkerEmail());
             wor.setWorkExperience(wor.getWorkExperience() + hrs);
 
-            myOrdersService.sendEmail(details.getUserEmail(), payment);
-            return "0";
+            myOrdersService.sendEmail(cur.getUserEmail(), payment);
+            return 0;
 
         } catch (Exception e) {
-            return e.toString();
+            return 9;
         }
     }
 

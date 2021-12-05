@@ -90,15 +90,15 @@ export const OrdersTable = (props) => {
                 </TableCell>
 
                 <TableCell>
-                  {order.carWash ? "YES" : "NO"}
-                </TableCell>
-
-                <TableCell>
                   {order.airFill ? "YES" : "NO"}
                 </TableCell>
 
                 <TableCell>
-                  {(order.totalPayment == 0) ? "In Progress" : orders.totalPayment}
+                  {order.carWash ? "YES" : "NO"}
+                </TableCell>
+
+                <TableCell>
+                  {(order.totalPayment == 0) ? "In Progress" : order.totalPayment}
                 </TableCell>
 
                 <TableCell>

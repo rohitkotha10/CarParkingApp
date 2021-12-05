@@ -5,42 +5,41 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { format } from "date-fns";
-
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Switch from '@mui/material/Switch';
 import {
+  Rating,
   Grid,
   TextField,
   Typography
 } from '@mui/material';
 
 export const AddBut = (props) => {
-  const { checkin, incre, date } = props;
+  const { Orderarr } = props;
   const [open, setOpen] = React.useState(false);
-  const [fullWidth, setFullWidth] = React.useState(true);
-  const [maxWidth, setMaxWidth] = React.useState('sm');
-  const [location, setLocation] = React.useState('');
+  const [rating, setRating] = React.useState(3);
+  const [comment, setComment] = React.useState('');
   const [authenticated, setAuth] = React.useState(5)
+  const [id, setId] = React.useState();
 
   const handleClickOpen = () => {
     setOpen(true);
-    console.log(props);
-    const myOrderdate = format(props.date, "yyyy-MM-dd");
-    const myCheckin = format(props.checkin, "HH:mm");
-    const myCheckout = format(new Date(checkin.getTime() + (incre * 60 * 60 * 1000)), "HH:mm")
-    const details = { myOrderdate, myCheckin, myCheckout }
-    console.log(details)
-  }
+  };
 
   const handleClose = () => {
-    if (location.length == 0) {
+    if (id == null) {
       setAuth(4)
       return;
     }
 
-    //const details = { myOrderdate, myCheckin, myCheckout, parkingSlotLocation }
+    const details = { id, comment, rating }
     console.log(details)
 
-    fetch("http://localhost:8080/parking/addparking", {
+    fetch("http://localhost:8080/myorders/addcomment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -63,14 +62,14 @@ export const AddBut = (props) => {
   return (
     <React.Fragment>
       <Button
+        onClick={handleClickOpen}
         color="primary"
         size="large"
-        type="submit"
         variant="contained"
-        onClick={handleClickOpen}
       >
-        Save settings
+        Add Review
       </Button>
+
       <Dialog
         fullWidth={true}
         maxWidth="md"
@@ -80,7 +79,7 @@ export const AddBut = (props) => {
         <DialogTitle variant="h4">Add Parking Spot</DialogTitle>
         {!(authenticated == 0 || authenticated == 5) && (
           <Typography color="#eb6359">
-            Already Exists, Please Try Again
+            Something Wrong, Please Try Again
           </Typography>
         )}
         <DialogContent alignitems="center">
@@ -97,16 +96,51 @@ export const AddBut = (props) => {
               xs={12}
             >
               <TextField
+                fullWidth
+                label="Check In"
+                variant="outlined"
+                select
+                variant="outlined"
+                onChange={(e) => setId(e.target.value)}
+              >
+                {Orderarr.map((orders) => (
+                  <MenuItem
+                    key={orders.id}
+                    value={orders.id}
+                  >
+                    {orders.id}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+
+            <Grid
+              item
+              xs={12}
+            >
+              <TextField
 
                 fullWidth
-                label="Location"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                label="Comment"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
                 variant="outlined"
               />
             </Grid>
+            <Grid
+              item
+              xs={12}
+            >
+              <Rating
+                name="simple-controlled"
+                value={rating}
+                onChange={(event, newValue) => {
+                  setRating(newValue);
+                }}
+              />
+            </Grid>
           </Grid>
-          <Button onClick={handleClose}>Add Parking Spot</Button>
+          <Button onClick={handleClose}>Complete</Button>
         </DialogContent>
       </Dialog>
     </React.Fragment>

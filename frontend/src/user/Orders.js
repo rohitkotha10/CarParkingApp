@@ -2,7 +2,8 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 
 import { OrdersTable } from '../components/orders-table';
-import PropTypes from 'prop-types';
+import { AddBut } from '../components/addcomment-dialog';
+
 import {
   Box,
   Button,
@@ -60,13 +61,7 @@ export default function Orders() {
             Orders
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
-          {/* <Button
-            color="primary"
-            size="large"
-            variant="contained"
-          >
-            Get Orders
-          </Button> */}
+          <AddBut Orderarr={orders} />
         </Box>
         <Card variant="outlined">
           <OrdersTable orders={orders} />
