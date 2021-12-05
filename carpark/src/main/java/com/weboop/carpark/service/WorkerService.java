@@ -14,6 +14,10 @@ public class WorkerService {
     @Autowired
     private WorkerRepository workerRepository;
 
+    public Worker findById(int id) {
+        return workerRepository.findById(id);
+    }
+
     public Worker findByEmail(String email) {
         return workerRepository.findByEmail(email);
     }

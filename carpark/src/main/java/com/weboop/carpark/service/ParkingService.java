@@ -14,6 +14,11 @@ public class ParkingService {
     @Autowired
     private ParkingRepository parkingRepository;
 
+    public ParkingSlot findById(int id) {
+        return parkingRepository.findById(id);
+    }
+
+
     public ParkingSlot findByLocation(String location) {
         return parkingRepository.findByLocation(location);
     }

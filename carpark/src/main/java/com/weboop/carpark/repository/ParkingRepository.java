@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ParkingRepository extends JpaRepository<ParkingSlot, Integer> {
 
+    public ParkingSlot findById(int id);
+
     public ParkingSlot findByLocation(String location);
 
     public boolean existsByLocation(String location);

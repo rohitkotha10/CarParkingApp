@@ -48,6 +48,16 @@ public class MyOrdersController {
         }
     }
 
+    @PostMapping("/getidinfo")
+    public MyOrders getidInfo(@RequestBody MyOrders details) {
+        try {
+            MyOrders cur = myOrdersService.findById(details.getId());
+            return cur;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     @PostMapping("/addmyorders")
     public int addmyOrders(@RequestBody MyOrders details) {
         try {
