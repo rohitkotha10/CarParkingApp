@@ -1,0 +1,518 @@
+{
+  "info": {
+    "_postman_id": "4e605ee6-39af-408d-8f76-ef176d7edc11",
+    "name": "CarApp",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register-Input",
+      "id": "19e0e94c-9a8a-4d0a-9134-bc50b7372a51",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \r\n    \"firstName\": \"Rohit\",\r\n    \"lastName\": \"Kotha\",\r\n    \"address\": \"BPHC\",\r\n    \"mobileNumber\": \"9490751746\",\r\n    \"carNumber\": \"TS11EN4521\",\r\n    \"email\": \"rohitkotha10@gmail.com\",\r\n    \"password\": \"welcome\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/register/input"
+      },
+      "response": []
+    },
+    {
+      "name": "Verify-Code",
+      "id": "7fed0e20-e551-4b1b-b966-0cba1f6719f4",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"rohitkotha10@gmail.com\",\r\n    \"enterCode\":\"977570\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/register/verifycode"
+      },
+      "response": []
+    },
+    {
+      "name": "Login-Normal",
+      "id": "3c2e86aa-5e3a-4396-96a4-5fb0554588d5",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \r\n    \"type\": \"User\", \r\n    \"email\": \"rohitkotha10@gmail.com\", \r\n    \"password\": \"Hello\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/login/normallogin"
+      },
+      "response": []
+    },
+    {
+      "name": "Login-Google",
+      "id": "5b53ae83-5605-45f4-9622-119dfffa2052",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \r\n    \"email\": \"rohitkotha10@gmail.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/login/googlelogin"
+      },
+      "response": []
+    },
+    {
+      "name": "Admin-Add",
+      "id": "270008e8-a647-4c97-83b7-b0f5331a1709",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"admin\",\r\n    \"password\": \"a\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/admin/addadmin"
+      },
+      "response": []
+    },
+    {
+      "name": "User-Add",
+      "id": "03bbd0f3-976f-4fe0-bef0-a54b79d832df",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"firstName\": \"Eisen\",\r\n    \"lastName\": \"bits\",\r\n    \"address\": \"BPHC\",\r\n    \"mobileNumber\": \"9490751746\",\r\n    \"carNumber\": \"TS11EN4521\",\r\n    \"email\": \"f20201890@hyderabad.bits-pilani.ac.in\",\r\n    \"password\": \"welcome\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/user/adduser"
+      },
+      "response": []
+    },
+    {
+      "name": "User-Remove",
+      "id": "0e2a05d4-74ba-47a9-b4ab-a278b93e2ceb",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"f2020a890@hyderabad.bits-pilani.ac.in\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/user/removeuser"
+      },
+      "response": []
+    },
+    {
+      "name": "Worker-Add",
+      "id": "01b5546f-873c-4a29-a5ed-1d7796412593",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\":\"worker6\",\r\n    \"name\"  : \"Ram\",\r\n    \"password\":\"a\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/worker/addworker"
+      },
+      "response": []
+    },
+    {
+      "name": "Parking-Add",
+      "id": "31d673a8-92f3-49e0-b342-bae52e737083",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"location\":\"A5\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/parking/addparking"
+      },
+      "response": []
+    },
+    {
+      "name": "Order-Add",
+      "id": "65fa2431-9768-4397-89e2-ee6e3223998e",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"parkingSlotLocation\":\"A5\",\r\n    \"userEmail\":\"rohitkotha10@gmail.com\",\r\n    \"workerEmail\": \"worker4@gmail.com\",\r\n    \"myOrderdate\":\"2021-12-05\", \r\n    \"myCheckin\":\"08:30\",\r\n    \"myCheckout\":\"09:30\",\r\n    \"carWash\":true,\r\n    \"airFill\":false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/myorders/addmyorders"
+      },
+      "response": []
+    },
+    {
+      "name": "Order-Remove",
+      "id": "451be7ef-9bbf-4fbc-94b5-5826d7867303",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"parkingSlotLocation\":\"A1\",\r\n    \"userEmail\":\"rohitkotha10@gmail.com\",\r\n    \"myOrderdate\":\"2021-12-04\", \r\n    \"myCheckin\":\"22:30\",\r\n    \"myCheckout\":\"23:30\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/myorders/removeorder"
+      },
+      "response": []
+    },
+    {
+      "name": "Admin-GetInfo",
+      "id": "9d8c6489-ebdd-42fe-b393-5f0e4e48b714",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\":\"admin\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/admin/getinfo"
+      },
+      "response": []
+    },
+    {
+      "name": "User-GetInfo",
+      "id": "06f232ee-b1f7-4c31-a9c6-9f8cc5cf506a",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\":\"rohitkotha10@gmail.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/user/getinfo"
+      },
+      "response": []
+    },
+    {
+      "name": "Worker-GetInfo",
+      "id": "926daefb-4184-4c9d-97df-b48323fba323",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\":\"admin\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/worker/getinfo"
+      },
+      "response": []
+    },
+    {
+      "name": "Worker-GetOrders",
+      "id": "f19edc36-8c41-4c86-95b2-b11b077d49dd",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\":\"worker1\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/worker/getorders"
+      },
+      "response": []
+    },
+    {
+      "name": "Parking-GetInfo",
+      "id": "6d8b099c-9483-4529-a9b9-dcfd51896dc4",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"location\":\"A1\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/parking/getinfo"
+      },
+      "response": []
+    },
+    {
+      "name": "Order-GetInfo",
+      "id": "639133d9-9ee2-453f-aeb3-6df3ece648c1",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"location\":\"A1\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/myorders/getinfo"
+      },
+      "response": []
+    },
+    {
+      "name": "Users-GetAll",
+      "id": "d7ff7f9a-7bde-4883-afcf-4867729e3a03",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"slotTime\":\"third\", \r\n    \"workerID\":1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/user/getallusers"
+      },
+      "response": []
+    },
+    {
+      "name": "Parking-GetAll",
+      "id": "bfe73115-e434-4875-acd9-c309ced52ca2",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"slotTime\":\"third\", \r\n    \"workerID\":1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/parking/getallparking"
+      },
+      "response": []
+    },
+    {
+      "name": "Workers-GetAll",
+      "id": "c768268b-31d6-444e-9019-940a74d25b2f",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/worker/getallworkers"
+      },
+      "response": []
+    },
+    {
+      "name": "Orders-GetAll",
+      "id": "660fb364-52dc-4286-965b-e4faca4e236a",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/myorders/getallorders"
+      },
+      "response": []
+    },
+    {
+      "name": "Order-ParkAvailable",
+      "id": "cb13c7fc-02a8-4759-8e7c-bee4af0c821d",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"myOrderdate\": \"2021-12-05\",\r\n    \"myCheckin\": \"01:30\",\r\n    \"myCheckout\": \"02:00\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/myorders/availablepark"
+      },
+      "response": []
+    },
+    {
+      "name": "Order-WorkAvailable",
+      "id": "ca56ed4f-e781-447e-b99e-dcd61c831ca2",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"orderDate\":\"2021-12-02\", \r\n    \"checkIn\":\"22:30\",\r\n    \"checkOut\":\"23:30\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/myorders/availablework"
+      },
+      "response": []
+    },
+    {
+      "name": "Payment",
+      "id": "c4802824-5459-4883-b46c-13d101ee5898",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"parkingSlotLocation\":\"A2\",\r\n    \"userEmail\":\"rohitkotha10@gmail.com\",\r\n    \"myOrderdate\":\"2021-12-04\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/myorders/getpayment"
+      },
+      "response": []
+    },
+    {
+      "name": "Comment",
+      "id": "c8b02e68-0241-4007-ab9e-3c812dced818",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n        \"id\": 2,\r\n        \"myOrderdate\": \"2021-12-04\",\r\n        \"myCheckin\": \"22:30\",\r\n        \"myCheckout\": \"23:30\",\r\n        \"rating\": 0,\r\n        \"totalPayment\": 0,\r\n        \"carWash\": true,\r\n        \"airFill\": false,\r\n        \"comment\": \"t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The poiears, sometimes by accident, sometimes on purpose (injected humour and the like).\",\r\n        \"parkingSlotLocation\": \"A2\",\r\n        \"userEmail\": \"rohitkotha10@gmail.com\",\r\n        \"workerEmail\": \"worker1\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/myorders/addcomment"
+      },
+      "response": []
+    },
+    {
+      "name": "Order-GetIdInfo",
+      "id": "e37768fa-2abc-4920-8d0e-902961f6c212",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\":5\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": "localhost:8080/myorders/getidinfo"
+      },
+      "response": []
+    }
+  ]
+}
