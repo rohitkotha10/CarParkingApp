@@ -5,47 +5,85 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { format } from "date-fns";
+import { format, setQuarter } from "date-fns";
 
 import {
+  MenuItem,
   Grid,
   TextField,
   Typography
 } from '@mui/material';
 
 export const AddBut = (props) => {
-  const { checkin, incre, date } = props;
+  const { checkin, incre, date, mailuser } = props;
   const [open, setOpen] = React.useState(false);
-  const [fullWidth, setFullWidth] = React.useState(true);
-  const [maxWidth, setMaxWidth] = React.useState('sm');
-  const [location, setLocation] = React.useState('');
   const [authenticated, setAuth] = React.useState(5)
+  const [parkingSlotLocation, setPark] = React.useState('')
+  const [workerEmail, setWork] = React.useState('')
+  const [carWash, setWash] = React.useState(false)
+  const [airFill, setAir] = React.useState(false)
+  const userEmail = mailuser
+
+  const [Parks, setParks] = React.useState([])
+  const [Works, setWorks] = React.useState([])
+  const Options = ["Yes", "No"]
 
   const handleClickOpen = () => {
+
     setOpen(true);
-    console.log(props);
     const myOrderdate = format(props.date, "yyyy-MM-dd");
     const myCheckin = format(props.checkin, "HH:mm");
     const myCheckout = format(new Date(checkin.getTime() + (incre * 60 * 60 * 1000)), "HH:mm")
     const details = { myOrderdate, myCheckin, myCheckout }
     console.log(details)
-  }
 
-  const handleClose = () => {
-    if (location.length == 0) {
-      setAuth(4)
-      return;
-    }
-
-    //const details = { myOrderdate, myCheckin, myCheckout, parkingSlotLocation }
-    console.log(details)
-
-    fetch("http://localhost:8080/parking/addparking", {
+    fetch("http://localhost:8080/myorders/availablepark", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(details)
+    }).then(data => data.json())
+      .then((data) => {
+        setParks(data);
+        console.log(data);
+      })
+
+    fetch("http://localhost:8080/myorders/availablework", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(details)
+    }).then(data => data.json())
+      .then((data) => {
+        setWorks(data);
+        console.log(data);
+      })
+  }
+
+  const handleClose = () => {
+    if (parkingSlotLocation.length == 0) {
+      setAuth(4)
+      return;
+    }
+
+    const myOrderdate = format(props.date, "yyyy-MM-dd");
+    const myCheckin = format(props.checkin, "HH:mm");
+    const myCheckout = format(new Date(checkin.getTime() + (incre * 60 * 60 * 1000)), "HH:mm")
+
+    const tosend = {
+      myOrderdate, myCheckin, myCheckout,
+      parkingSlotLocation, userEmail, workerEmail, carWash, airFill
+    }
+    console.log(tosend)
+
+    fetch("http://localhost:8080/myorders/addmyorders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(tosend)
     }).then(data => data.json())
       .then((data) => {
         setAuth(data);
@@ -69,7 +107,7 @@ export const AddBut = (props) => {
         variant="contained"
         onClick={handleClickOpen}
       >
-        Save settings
+        Next
       </Button>
       <Dialog
         fullWidth={true}
@@ -97,18 +135,103 @@ export const AddBut = (props) => {
               xs={12}
             >
               <TextField
-
                 fullWidth
-                label="Location"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
+                label="Parking Slot"
                 variant="outlined"
-              />
+                select
+                variant="outlined"
+                onChange={(e) => setPark(e.target.value)}
+              >
+                {Parks.map((parks) => (
+                  <MenuItem
+                    key={parks.location}
+                    value={parks.location}
+                  >
+                    {parks.location}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Worker"
+                variant="outlined"
+                select
+                variant="outlined"
+                onChange={(e) => setWork(e.target.value)}
+              >
+                {Works.map((worker) => (
+                  <MenuItem
+                    key={worker.email}
+                    value={worker.email}
+                  >
+                    {worker.email}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Car Wash"
+                variant="outlined"
+                select
+                variant="outlined"
+                onChange={(e) => {
+                  if (e.target.value === "Yes") {
+                    setWash(true)
+                  }
+                  else setWash(false)
+                }}
+              >
+                {Options.map((op) => (
+                  <MenuItem
+                    key={op}
+                    value={op}
+                  >
+                    {op}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Air Fill"
+                variant="outlined"
+                select
+                variant="outlined"
+                onChange={(e) => {
+                  if (e.target.value === "Yes") {
+                    setAir(true)
+                  }
+                  else setAir(false)
+                }}
+              >
+                {Options.map((op) => (
+                  <MenuItem
+                    key={op}
+                    value={op}
+                  >
+                    {op}
+                  </MenuItem>
+                ))}
+              </TextField>
             </Grid>
           </Grid>
-          <Button onClick={handleClose}>Add Parking Spot</Button>
+          <Button onClick={handleClose}>Add Order</Button>
         </DialogContent>
       </Dialog>
-    </React.Fragment>
+    </React.Fragment >
   );
 }

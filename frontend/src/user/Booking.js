@@ -167,7 +167,7 @@ export default function Booking() {
                     item
                     xs={12}
                   >
-                    <AddBut checkin={myCheckin} incre={duration} date={myOrderdate} />
+                    <AddBut checkin={myCheckin} incre={duration} date={myOrderdate} mailuser={email} />
                   </Grid>
                 </Grid>
               </div>
