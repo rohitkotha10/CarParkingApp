@@ -17,16 +17,16 @@ import {
 } from '@mui/material';
 const styles = {
   paperContainer: {
-      backgroundImage: `url(${Image})`,
-      height:"100vh",
-      weight:"100hh"
+    backgroundImage: `url(${Image})`,
+    height: "100vh",
+    weight: "100hh"
   }
 };
 
 export default function ProfileInfo() {
   const styletheme = createTheme({
     typography: {
-  
+
       fontFamily: [
         'Chilanka',
         'cursive',
@@ -40,7 +40,7 @@ export default function ProfileInfo() {
         contrastText: '#fff',
       },
       secondary: {
-  
+
         dark: '#1d1f20',
         main: '#303641',
         background: '#373b3d',
@@ -50,7 +50,7 @@ export default function ProfileInfo() {
         main: '#ffffff',
       },
     },
-  
+
   })
   let navigate = useNavigate();
   const location = useLocation();
@@ -75,175 +75,175 @@ export default function ProfileInfo() {
 
   return (
     <ThemeProvider theme={styletheme}>
-    <Box 
-    style={styles.paperContainer}
-      sx={{
-        backgroundColor: 'background.default',
-        pb: 3,
-        pt: 8
-      }}
-    >
-      <Container maxWidth="lg">
-        <Box
-          sx={{
-            alignitems: 'center',
-            display: 'flex',
-            mb: 3
-          }}
-        >
-          <Typography
-            color="#ffff"
-            variant="h4"
+      <Box
+        style={styles.paperContainer}
+        sx={{
+          backgroundColor: 'background.default',
+          pb: 3,
+          pt: 8
+        }}
+      >
+        <Container maxWidth="lg">
+          <Box
+            sx={{
+              alignitems: 'center',
+              display: 'flex',
+              mb: 3
+            }}
           >
-            Profile
-          </Typography>
-          <Box sx={{ flexGrow: 1 }} />
-        </Box>
-
-        <Grid
-          container
-          spacing={3}
-        >
-          <Grid
-            item
-            md={6}
-            xs={120}
-          >
-            <Card
-              variant="outlined"
-              sx={{ p: 3 }}
+            <Typography
+              color="#ffff"
+              variant="h4"
             >
+              Profile
+            </Typography>
+            <Box sx={{ flexGrow: 1 }} />
+          </Box>
 
-              <div>
-                <Box
-                  sx={{
-                    alignitems: 'center',
-                    display: 'flex',
-                    pb: 3
-                  }}
-                >
-                  <Avatar
+          <Grid
+            container
+            spacing={3}
+          >
+            <Grid
+              item
+              md={6}
+              xs={120}
+            >
+              <Card
+                variant="outlined"
+                sx={{ p: 3 }}
+              >
+
+                <div>
+                  <Box
                     sx={{
-                      height: 64,
-                      mr: 2,
-                      width: 64
+                      alignitems: 'center',
+                      display: 'flex',
+                      pb: 3
                     }}
-                  />
-                </Box>
-
-                <Grid
-                  container
-                  spacing={2}
-                  sx={{ maxWidth: 420 }}
-                >
-                  <Grid
-                    item
-                    xs={12}
                   >
-                    <TextField
-
-                      fullWidth
-                      label="First Name"
-                      value={user.email}
-                      variant="outlined"
-                      InputProps={{
-                        readOnly: true,
+                    <Avatar
+                      sx={{
+                        height: 64,
+                        mr: 2,
+                        width: 64
                       }}
-                      InputLabelProps={{ shrink: true }}
                     />
-                  </Grid>
+                  </Box>
 
                   <Grid
-                    item
-                    xs={12}
+                    container
+                    spacing={2}
+                    sx={{ maxWidth: 420 }}
                   >
-                    <TextField
+                    <Grid
+                      item
+                      xs={12}
+                    >
+                      <TextField
 
-                      fullWidth
-                      label="First Name"
-                      value={user.firstName}
-                      variant="outlined"
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                      InputLabelProps={{ shrink: true }}
-                    />
+                        fullWidth
+                        label="First Name"
+                        value={user.email}
+                        variant="outlined"
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                        InputLabelProps={{ shrink: true }}
+                      />
+                    </Grid>
+
+                    <Grid
+                      item
+                      xs={12}
+                    >
+                      <TextField
+
+                        fullWidth
+                        label="First Name"
+                        value={user.firstName}
+                        variant="outlined"
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                        InputLabelProps={{ shrink: true }}
+                      />
+                    </Grid>
+
+                    <Grid
+                      item
+                      xs={12}
+                    >
+                      <TextField
+
+                        fullWidth
+                        label="Last Name"
+                        value={user.lastName}
+                        variant="outlined"
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                        InputLabelProps={{ shrink: true }}
+                      />
+                    </Grid>
+
+                    <Grid
+                      item
+                      xs={12}
+                    >
+                      <TextField
+
+                        fullWidth
+                        label="Address"
+                        value={user.address}
+                        variant="outlined"
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                        InputLabelProps={{ shrink: true }}
+                      />
+                    </Grid>
+
+                    <Grid
+                      item
+                      xs={12}
+                    >
+                      <TextField
+
+                        fullWidth
+                        label="Mobile Number"
+                        value={user.mobileNumber}
+                        variant="outlined"
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                        InputLabelProps={{ shrink: true }}
+                      />
+                    </Grid>
+
+                    <Grid
+                      item
+                      xs={12}
+                    >
+                      <TextField
+
+                        fullWidth
+                        label="Car Number"
+                        value={user.carNumber}
+                        variant="outlined"
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                        InputLabelProps={{ shrink: true }}
+                      />
+                    </Grid>
                   </Grid>
-
-                  <Grid
-                    item
-                    xs={12}
-                  >
-                    <TextField
-
-                      fullWidth
-                      label="Last Name"
-                      value={user.lastName}
-                      variant="outlined"
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                      InputLabelProps={{ shrink: true }}
-                    />
-                  </Grid>
-
-                  <Grid
-                    item
-                    xs={12}
-                  >
-                    <TextField
-
-                      fullWidth
-                      label="Address"
-                      value={user.address}
-                      variant="outlined"
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                      InputLabelProps={{ shrink: true }}
-                    />
-                  </Grid>
-
-                  <Grid
-                    item
-                    xs={12}
-                  >
-                    <TextField
-
-                      fullWidth
-                      label="Mobile Number"
-                      value={user.mobileNumber}
-                      variant="outlined"
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                      InputLabelProps={{ shrink: true }}
-                    />
-                  </Grid>
-
-                  <Grid
-                    item
-                    xs={12}
-                  >
-                    <TextField
-
-                      fullWidth
-                      label="Car Number"
-                      value={user.carNumber}
-                      variant="outlined"
-                      InputProps={{
-                        readOnly: true,
-                      }}
-                      InputLabelProps={{ shrink: true }}
-                    />
-                  </Grid>
-                </Grid>
-              </div>
-            </Card>
+                </div>
+              </Card>
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
-    </Box >
+        </Container>
+      </Box >
     </ThemeProvider>
   );
 }

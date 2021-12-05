@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { AddBut } from './viewcomments-dialog'
 
 import {
-  Button,
   Table,
   TableBody,
   TableCell,

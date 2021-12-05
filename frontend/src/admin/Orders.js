@@ -4,11 +4,7 @@ import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { OrdersTable } from '../components/orders-table';
-import {
-  Box,
-  Card, Container, Divider,
-  Typography
-} from '@mui/material';
+import { Box, Card, Container, Divider, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Image from '../image/super2.jpg';

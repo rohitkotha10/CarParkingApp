@@ -16,16 +16,16 @@ import Image from '../image/super2.jpg';
 
 const styles = {
   paperContainer: {
-      backgroundImage: `url(${Image})`,
-      height: "100vh",
-      width: "100hh"
+    backgroundImage: `url(${Image})`,
+    height: "100vh",
+    width: "100hh"
   }
 };
 
 export default function Orders() {
   const styletheme = createTheme({
     typography: {
-  
+
       fontFamily: [
         'Chilanka',
         'cursive',
@@ -39,7 +39,7 @@ export default function Orders() {
         contrastText: '#fff',
       },
       secondary: {
-  
+
         dark: '#1d1f20',
         main: '#303641',
         background: '#373b3d',
@@ -49,7 +49,7 @@ export default function Orders() {
         main: '#ffffff',
       },
     },
-  
+
   })
   let navigate = useNavigate();
   const location = useLocation();
@@ -75,38 +75,38 @@ export default function Orders() {
   }, [])
 
   return (
-    
-<ThemeProvider theme={styletheme}>
-    <Box style={styles.paperContainer}
-      sx={{
-        backgroundColor: 'background.default',
-        pb: 3,
-        pt: 8
-      }}
-    >
-      <Container maxWidth="lg">
-        <Box
-          sx={{
-            alignitems: 'center',
-            display: 'flex',
-            mb: 3
-          }}
-        >
-          <Typography
-            color="#ffff"
-            variant="h4"
+
+    <ThemeProvider theme={styletheme}>
+      <Box style={styles.paperContainer}
+        sx={{
+          backgroundColor: 'background.default',
+          pb: 3,
+          pt: 8
+        }}
+      >
+        <Container maxWidth="lg">
+          <Box
+            sx={{
+              alignitems: 'center',
+              display: 'flex',
+              mb: 3
+            }}
           >
-            Orders
-          </Typography>
-          <Box sx={{ flexGrow: 1 }} />
-          <AddBut Orderarr={orders} />
-        </Box>
-        <Card variant="outlined">
-          <OrdersTable orders={orders} />
-          <Divider />
-        </Card>
-      </Container>
-    </Box>
+            <Typography
+              color="#ffff"
+              variant="h4"
+            >
+              Orders
+            </Typography>
+            <Box sx={{ flexGrow: 1 }} />
+            <AddBut Orderarr={orders} />
+          </Box>
+          <Card variant="outlined">
+            <OrdersTable orders={orders} />
+            <Divider />
+          </Card>
+        </Container>
+      </Box>
     </ThemeProvider>
   );
 };

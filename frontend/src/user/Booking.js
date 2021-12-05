@@ -6,7 +6,10 @@ import { AddBut } from '../components/booking-dialog';
 import { makeStyles } from "@mui/styles";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
+import TimePicker from '@mui/lab/TimePicker';
 import Image from '../image/super2.jpg';
 
 import {
@@ -35,22 +38,16 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
-import TimePicker from '@mui/lab/TimePicker';
-
-const companySizeOptions = ['1-10', '11-30', '31-50', '50+'];
 const styles = {
   paperContainer: {
-      backgroundImage: `url(${Image})`,
-      height:"100vh",
-      weight:"100hh"
+    backgroundImage: `url(${Image})`,
+    height: "100vh",
+    weight: "100hh"
   }
 };
 
 
-export default function Booking () {
+export default function Booking() {
 
   let navigate = useNavigate();
   const location = useLocation();
@@ -70,7 +67,7 @@ export default function Booking () {
   const airFills = ['YES', 'NO']
   const styletheme = createTheme({
     typography: {
-  
+
       fontFamily: [
         'Chilanka',
         'cursive',
@@ -84,7 +81,7 @@ export default function Booking () {
         contrastText: '#fff',
       },
       secondary: {
-  
+
         dark: '#1d1f20',
         main: '#303641',
         background: '#373b3d',
@@ -94,146 +91,146 @@ export default function Booking () {
         main: '#ffffff',
       },
     },
-  
+
   })
   const classes = useStyles();
 
 
   return (
     <ThemeProvider theme={styletheme}>
-    <Box
-    style={styles.paperContainer}
-      sx={{
-        backgroundColor: 'secondary.main',
-        pb: 3,
-        pt: 8
-      }}
-    >
-      <Container maxWidth="lg">
-        <Box color="secondary.dark"
-          sx={{
-            alignitems: 'center',
-            display: 'flex',
-            mb: 3
-          }}
-        >
-          <Typography
-            color="#ffff"
-            variant="h4"
+      <Box
+        style={styles.paperContainer}
+        sx={{
+          backgroundColor: 'secondary.main',
+          pb: 3,
+          pt: 8
+        }}
+      >
+        <Container maxWidth="lg">
+          <Box color="secondary.dark"
+            sx={{
+              alignitems: 'center',
+              display: 'flex',
+              mb: 3
+            }}
           >
-            Booking
-          </Typography>
-          <Box sx={{ flexGrow: 1 }} />
-        </Box>
-
-        <Grid
-          container
-          spacing={3}
-        >
-          <Grid
-            item
-            md={6}
-            xs={120}
-          >
-            <Card
-              variant="outlined"
-              sx={{ p: 3 }}
+            <Typography
+              color="#ffff"
+              variant="h4"
             >
+              Booking
+            </Typography>
+            <Box sx={{ flexGrow: 1 }} />
+          </Box>
 
-              <div>
-                <Box
-                  sx={{
-                    alignitems: 'center',
-                    display: 'flex',
-                    pb: 3
-                  }}
-                >
-                  <Avatar
+          <Grid
+            container
+            spacing={3}
+          >
+            <Grid
+              item
+              md={6}
+              xs={120}
+            >
+              <Card
+                variant="outlined"
+                sx={{ p: 3 }}
+              >
+
+                <div>
+                  <Box
                     sx={{
-                      height: 64,
-                      mr: 2,
-                      width: 64
+                      alignitems: 'center',
+                      display: 'flex',
+                      pb: 3
                     }}
-                  />
-                </Box>
-
-                <Grid
-                  container
-                  spacing={2}
-                  sx={{ maxWidth: 420 }}
-                >
+                  >
+                    <Avatar
+                      sx={{
+                        height: 64,
+                        mr: 2,
+                        width: 64
+                      }}
+                    />
+                  </Box>
 
                   <Grid
-                    item
-                    xs={12}
+                    container
+                    spacing={2}
+                    sx={{ maxWidth: 420 }}
                   >
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <Stack spacing={3}>
-                        <DatePicker
-                          label="Date"
-                          value={myOrderdate}
+
+                    <Grid
+                      item
+                      xs={12}
+                    >
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <Stack spacing={3}>
+                          <DatePicker
+                            label="Date"
+                            value={myOrderdate}
+                            onChange={(newValue) => {
+                              setDate(newValue);
+                            }}
+                            renderInput={(params) => <TextField {...params} />}
+                          />
+                        </Stack>
+                      </LocalizationProvider>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={12}
+                    >
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <TimePicker
+                          label="Basic example"
+                          value={myCheckin}
+                          minTime={new Date(0, 0, 0, 5, 0)}
+                          maxTime={new Date(0, 0, 0, 18, 30)}
                           onChange={(newValue) => {
-                            setDate(newValue);
+                            setCheckin(newValue);
                           }}
                           renderInput={(params) => <TextField {...params} />}
                         />
-                      </Stack>
-                    </LocalizationProvider>
-                  </Grid>
-                  <Grid
-                    item
-                    xs={12}
-                  >
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <TimePicker
-                        label="Basic example"
-                        value={myCheckin}
-                        minTime={new Date(0, 0, 0, 5, 0)}
-                        maxTime={new Date(0, 0, 0, 18, 30)}
-                        onChange={(newValue) => {
-                          setCheckin(newValue);
-                        }}
-                        renderInput={(params) => <TextField {...params} />}
-                      />
-                    </LocalizationProvider>
-                  </Grid>
+                      </LocalizationProvider>
+                    </Grid>
 
-                  <Grid
-                    item
-                    xs={12}
-                  >
-                    <TextField
-                      fullWidth
-                      label="Duration"
-                      variant="outlined"
-                      select
-                      variant="outlined"
-                      onChange={(e) => setDuration(e.target.value)}
+                    <Grid
+                      item
+                      xs={12}
                     >
-                      {Durations.map((hrs) => (
-                        <MenuItem
-                          key={hrs}
-                          value={hrs}
-                        >
-                          {hrs}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                  </Grid>
+                      <TextField
+                        fullWidth
+                        label="Duration"
+                        variant="outlined"
+                        select
+                        variant="outlined"
+                        onChange={(e) => setDuration(e.target.value)}
+                      >
+                        {Durations.map((hrs) => (
+                          <MenuItem
+                            key={hrs}
+                            value={hrs}
+                          >
+                            {hrs}
+                          </MenuItem>
+                        ))}
+                      </TextField>
+                    </Grid>
 
-                  <Grid
-                    item
-                    xs={12}
-                  >
-                    <AddBut checkin={myCheckin} incre={duration} date={myOrderdate} mailuser={email} />
+                    <Grid
+                      item
+                      xs={12}
+                    >
+                      <AddBut checkin={myCheckin} incre={duration} date={myOrderdate} mailuser={email} />
+                    </Grid>
                   </Grid>
-                </Grid>
-              </div>
-            </Card>
+                </div>
+              </Card>
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
-    </Box >
+        </Container>
+      </Box >
     </ThemeProvider>
   );
 }
