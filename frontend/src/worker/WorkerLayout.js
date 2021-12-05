@@ -74,7 +74,7 @@ export default function Layout() {
         <Toolbar
           disableGutters
           sx={{
-            alignItems: 'center',
+            alignitems: 'center',
             display: 'flex',
             minHeight: 64,
             px: 3,
@@ -158,7 +158,6 @@ export default function Layout() {
       </Drawer>
       <DashboardLayoutContentWrapper>
         <DashboardLayoutContent>
-          <div>Hello</div>
           <Outlet />
         </DashboardLayoutContent>
       </DashboardLayoutContentWrapper>

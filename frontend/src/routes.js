@@ -104,7 +104,7 @@ export const routes = [
           sx={{
             px: 5,
             py: 14,
-            alignItems: 'center',
+            alignitems: 'center',
             display: 'flex',
             flexDirection: 'column'
           }}

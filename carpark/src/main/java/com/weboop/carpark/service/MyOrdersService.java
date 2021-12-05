@@ -19,6 +19,10 @@ public class MyOrdersService {
     @Autowired
     private JavaMailSender mailSender;// Gmail SMTP
 
+    public List<MyOrders> findByMyOrderdate(String myOrderdate) {
+        return myOrdersRepository.findByMyOrderdate(myOrderdate);
+    }
+
     public List<MyOrders> findByUserEmail(String userEmail) {
         return myOrdersRepository.findByUserEmail(userEmail);
     }

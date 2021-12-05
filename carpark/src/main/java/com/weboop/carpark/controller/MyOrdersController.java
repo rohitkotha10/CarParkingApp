@@ -61,9 +61,8 @@ public class MyOrdersController {
     @PostMapping("/availablepark") // time and date
     public List<ParkingSlot> parkavailable(@RequestBody MyOrders details) {
         try {
-            ArrayList<MyOrders> occupied = (ArrayList<MyOrders>) myOrdersService
-                    .findByMyOrderdateAndMyCheckinAndMyCheckout(
-                            details.getMyOrderdate(), details.getMyCheckin(), details.getMyCheckout());
+            ArrayList<MyOrders> ordersall = (ArrayList<MyOrders>) myOrdersService
+                    .findByMyOrderdate(details.getMyOrderdate());
 
             ArrayList<ParkingSlot> old = (ArrayList<ParkingSlot>) parkingService.getAllParking();
             ArrayList<ParkingSlot> cur = new ArrayList<ParkingSlot>();
@@ -74,13 +73,22 @@ public class MyOrdersController {
                 visited.add(0);
             }
 
-            for (int i = 0; i < occupied.size(); i++) {
-                String slotHere = occupied.get(i).getParkingSlotLocation();
-                for (int j = 0; j < old.size(); j++) {
-                    if (old.get(j).getLocation().equals(slotHere)) {
-                        visited.set(j, 1);
+            for (int i = 0; i < old.size(); i++) {
+
+                for (int j = 0; j < ordersall.size(); j++) {
+                    if (old.get(i).getLocation().equals(ordersall.get(j).getParkingSlotLocation())) {
+                        String i1 = details.getMyCheckin();
+                        String o1 = details.getMyCheckout();
+                        String i2 = ordersall.get(j).getMyCheckin();
+                        String o2 = ordersall.get(j).getMyCheckout();
+                        if (!((i1.compareTo(i2) <= 0 && o1.compareToIgnoreCase(i2) <= 0) ||
+                                (i1.compareTo(o2) >= 0 && o1.compareTo(o2) >= 0))) {
+                            visited.set(i, 1);
+                            break;
+                        }
                     }
                 }
+
             }
 
             for (int i = 0; i < visited.size(); i++) {
@@ -97,9 +105,8 @@ public class MyOrdersController {
     @PostMapping("/availablework")
     public List<Worker> workavailable(@RequestBody MyOrders details) {
         try {
-            ArrayList<MyOrders> occupied = (ArrayList<MyOrders>) myOrdersService
-                    .findByMyOrderdateAndMyCheckinAndMyCheckout(
-                            details.getMyOrderdate(), details.getMyCheckin(), details.getMyCheckout());
+            ArrayList<MyOrders> ordersall = (ArrayList<MyOrders>) myOrdersService
+                    .findByMyOrderdate(details.getMyOrderdate());
 
             ArrayList<Worker> old = (ArrayList<Worker>) workerService.getAllWorkers();
             ArrayList<Worker> cur = new ArrayList<Worker>();
@@ -110,13 +117,22 @@ public class MyOrdersController {
                 visited.add(0);
             }
 
-            for (int i = 0; i < occupied.size(); i++) {
-                String slotHere = occupied.get(i).getWorkerEmail();
-                for (int j = 0; j < old.size(); j++) {
-                    if (old.get(j).getEmail().equals(slotHere)) {
-                        visited.set(j, 1);
+            for (int i = 0; i < old.size(); i++) {
+
+                for (int j = 0; j < ordersall.size(); j++) {
+                    if (old.get(i).getEmail().equals(ordersall.get(j).getWorkerEmail())) {
+                        String i1 = details.getMyCheckin();
+                        String o1 = details.getMyCheckout();
+                        String i2 = ordersall.get(j).getMyCheckin();
+                        String o2 = ordersall.get(j).getMyCheckout();
+                        if (!((i1.compareTo(i2) <= 0 && o1.compareToIgnoreCase(i2) <= 0) ||
+                                (i1.compareTo(o2) >= 0 && o1.compareTo(o2) >= 0))) {
+                            visited.set(i, 1);
+                            break;
+                        }
                     }
                 }
+
             }
 
             for (int i = 0; i < visited.size(); i++) {
@@ -141,10 +157,7 @@ public class MyOrdersController {
                     details.getMyCheckin(),
                     details.getMyCheckout());
 
-            List<String> addthis = cur.getComments();
-            addthis.add(details.getComments().get(0));
-
-            cur.setComments(addthis);
+            cur.setComment(details.getComment());
             cur.setRating(details.getRating());
 
             Worker wor = workerService.findByEmail(cur.getWorkerEmail());

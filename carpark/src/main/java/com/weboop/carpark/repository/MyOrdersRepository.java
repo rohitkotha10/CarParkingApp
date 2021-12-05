@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MyOrdersRepository extends JpaRepository<MyOrders, Integer> {
 
-        public List<MyOrders> findAllByMyOrderdate(String myOrderdate);
+        public List<MyOrders> findByMyOrderdate(String myOrderdate);
 
         public List<MyOrders> findByWorkerEmail(String workerEmail);
 

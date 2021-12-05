@@ -1,8 +1,5 @@
 package com.weboop.carpark.model;
 
-import java.util.*;
-
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,15 +22,21 @@ public class MyOrders {
     private boolean carWash = false;
     private boolean airFill = false;
 
-    @ElementCollection
-    private List<String> comments = new ArrayList<String>();
-
+    private String comment;
     private String parkingSlotLocation;
     private String userEmail;
     private String workerEmail;
 
     public int getId() {
         return id;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public String getMyCheckout() {
@@ -58,14 +61,6 @@ public class MyOrders {
 
     public void setMyOrderdate(String myOrderdate) {
         this.myOrderdate = myOrderdate;
-    }
-
-    public List<String> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<String> comments) {
-        this.comments = comments;
     }
 
     public String getParkingSlotLocation() {
