@@ -1,8 +1,9 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import Image from '../image/super2.jpg';
 
 import {
   Avatar,
@@ -14,7 +15,44 @@ import {
   Typography
 } from '@mui/material';
 
+const styles = {
+  paperContainer: {
+      backgroundImage: `url(${Image})`,
+      height:"100vh",
+      weight:"100hh"
+  }
+};
+
 export default function ProfileInfo() {
+  const styletheme = createTheme({
+    typography: {
+  
+      fontFamily: [
+        'Chilanka',
+        'cursive',
+      ].join(','),
+    },
+    palette: {
+      primary: {
+        light: '#757ce8',
+        main: '#3f50b5',
+        dark: '#002884',
+        contrastText: '#fff',
+      },
+      secondary: {
+  
+        dark: '#1d1f20',
+        main: '#303641',
+        background: '#373b3d',
+        contrastText: '#ffffff',
+      },
+      neutral: {
+        main: '#ffffff',
+      },
+    },
+  
+  })
+ 
 
   let navigate = useNavigate();
   const location = useLocation();
@@ -38,7 +76,9 @@ export default function ProfileInfo() {
   }, []);
 
   return (
-    <Box
+    <ThemeProvider theme={styletheme}>
+    <Box 
+    style={styles.paperContainer}
       sx={{
         backgroundColor: 'background.default',
         pb: 3,
@@ -54,7 +94,7 @@ export default function ProfileInfo() {
           }}
         >
           <Typography
-            color="textPrimary"
+            color="#ffff"
             variant="h4"
           >
             Profile
@@ -172,5 +212,6 @@ export default function ProfileInfo() {
         </Grid>
       </Container>
     </Box >
+    </ThemeProvider>
   );
 }

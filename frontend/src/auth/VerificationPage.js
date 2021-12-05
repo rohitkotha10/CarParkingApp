@@ -114,8 +114,8 @@ export default function VerificationPage() {
       <ThemeProvider theme={styletheme}>
         <Box
           sx={{
-            width: 1536,
-            height: 593,
+            width: "100hh",
+            height: "100vh",
             backgroundColor: 'secondary.main',
           }} pt={20}>
           <Container sx={{ justifyContent: 'center' }}>

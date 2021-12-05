@@ -3,6 +3,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { AddBut } from '../components/booking-dialog';
+import { makeStyles } from "@mui/styles";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+
+import Image from '../image/super2.jpg';
 
 import {
   Avatar,
@@ -15,6 +20,20 @@ import {
   TextField,
   Typography
 } from '@mui/material';
+const useStyles = makeStyles(() => ({
+  selectstyle: {
+    background: "#373b3d"
+  },
+  whiteColor: {
+    color: "white"
+  },
+  root: {
+    "& .MuiFilledInput-root": {
+      background: "#373b3d"
+    },
+
+  },
+}));
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -22,8 +41,16 @@ import DatePicker from '@mui/lab/DatePicker';
 import TimePicker from '@mui/lab/TimePicker';
 
 const companySizeOptions = ['1-10', '11-30', '31-50', '50+'];
+const styles = {
+  paperContainer: {
+      backgroundImage: `url(${Image})`,
+      height:"100vh",
+      weight:"100hh"
+  }
+};
 
-export default function Booking() {
+
+export default function Booking () {
 
   let navigate = useNavigate();
   const location = useLocation();
@@ -41,18 +68,49 @@ export default function Booking() {
   const [duration, setDuration] = useState('');
   const carWashs = ['YES', 'NO']
   const airFills = ['YES', 'NO']
+  const styletheme = createTheme({
+    typography: {
+  
+      fontFamily: [
+        'Chilanka',
+        'cursive',
+      ].join(','),
+    },
+    palette: {
+      primary: {
+        light: '#757ce8',
+        main: '#3f50b5',
+        dark: '#002884',
+        contrastText: '#fff',
+      },
+      secondary: {
+  
+        dark: '#1d1f20',
+        main: '#303641',
+        background: '#373b3d',
+        contrastText: '#ffffff',
+      },
+      neutral: {
+        main: '#ffffff',
+      },
+    },
+  
+  })
+  const classes = useStyles();
 
 
   return (
+    <ThemeProvider theme={styletheme}>
     <Box
+    style={styles.paperContainer}
       sx={{
-        backgroundColor: 'background.default',
+        backgroundColor: 'secondary.main',
         pb: 3,
         pt: 8
       }}
     >
       <Container maxWidth="lg">
-        <Box
+        <Box color="secondary.dark"
           sx={{
             alignitems: 'center',
             display: 'flex',
@@ -60,7 +118,7 @@ export default function Booking() {
           }}
         >
           <Typography
-            color="textPrimary"
+            color="#ffff"
             variant="h4"
           >
             Booking
@@ -176,5 +234,6 @@ export default function Booking() {
         </Grid>
       </Container>
     </Box >
+    </ThemeProvider>
   );
 }
