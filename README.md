@@ -5,7 +5,7 @@ Spring Inititalizer Dependencies can be found in `pom.xml`
 install apache maven and add maven to path.  
 run these commands in the backend root directory `carpark`  
 install dependencies with `mvn install`  
-before starting backend create a database in mysql with the name  `carparktesting` and run the mysql server at port 3306  
+before starting backend create a database in mysql with the name  `carparkapp` and run the mysql server at port 3306  
 start backend server with `mvn spring-boot:run` at port 8080  
 The postman collection `PostmanTests.json` was used for tesing some backend commands  
 
