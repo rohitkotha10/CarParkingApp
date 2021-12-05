@@ -17,7 +17,7 @@ public class Worker {
     private String email;
     private int workExperience = 0; // in hours
     private String password;
-    private float rating = 3;
+    private float rating;
     private int count = 0;
 
     public int getId() {

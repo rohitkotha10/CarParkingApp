@@ -14,7 +14,7 @@ public class ParkingSlot {
     private int id;
 
     private String location;
-    private float rating = 3;
+    private float rating;
     private int count = 0;
 
     public int getId() {

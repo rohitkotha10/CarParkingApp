@@ -162,20 +162,15 @@ public class MyOrdersController {
         try {
             MyOrders cur = myOrdersService.findById(details.getId());
 
+            if (cur.getRating() != 0 || cur.getTotalPayment() == 0)
+                return 1;
+
             cur.setComment(details.getComment());
             cur.setRating(details.getRating());
 
             Worker wor = workerService.findByEmail(cur.getWorkerEmail());
-            if (wor.getCount() == 0) {
-                wor.setCount(1);
-                wor.setRating(details.getRating());
-            }
-
             ParkingSlot par = parkingService.findByLocation(cur.getParkingSlotLocation());
-            if (par.getCount() == 0) {
-                par.setCount(1);
-                par.setRating(details.getRating());
-            }
+            
             float ratw = wor.getRating() * wor.getCount();
             ratw += details.getRating();
             wor.setCount(wor.getCount() + 1);
