@@ -112,7 +112,7 @@ export const routes = [
           <SentimentVeryDissatisfiedIcon />
           <Typography
             align="center"
-            color="textPrimary"
+            color="#ffff"
             sx={{ my: 2 }}
             variant="h3"
           >
